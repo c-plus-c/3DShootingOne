@@ -9,6 +9,7 @@ Bullet::Bullet(VECTOR direction, VECTOR translation, int damage, float speed,  B
 	_bulletType = bulletType;
 	_count = 0;
 	_targetEnemy = NULL;
+	_hit = false;
 	if (_bulletType == BULLET_TYPE_PLAYER_HORMING)
 	{
 		float mdist = 10000000;
@@ -25,7 +26,6 @@ Bullet::Bullet(VECTOR direction, VECTOR translation, int damage, float speed,  B
 			}
 		}
 	}
-	_hit = false;
 }
 
 void Bullet::Update(char input[])

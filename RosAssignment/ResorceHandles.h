@@ -18,6 +18,9 @@ class ResourceHandles
 		playerIconHandle = LoadGraph("red_icon.png");
 		ufoIconHandle = LoadGraph("red_icon.png");
 		pFontHandle = CreateFontToHandle(NULL, 10, 1);
+
+		MagicSquareHandle = LoadGraph("magic_square.png");
+		LoadDivGraph("exp.png", 40, 4, 10, 301, 247, ExplosionHandle);
 	}
 public:
 	static ResourceHandles& getResourceHandles()
@@ -38,4 +41,7 @@ public:
 	int playerIconHandle;
 	int ufoIconHandle;
 	int pFontHandle;
+
+	int MagicSquareHandle;
+	int ExplosionHandle[40];
 };

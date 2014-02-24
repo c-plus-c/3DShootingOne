@@ -27,7 +27,7 @@ void UpdateField()
 		if (ObjectField::getObjectField().player.Collide(ite->GetTranslation(), 0.5))
 		{
 			ObjectField::getObjectField().player.Damage(1);
-			ite->SetDefeated(true);
+			ite->SetDefeated();
 		}
 	}
 
@@ -39,7 +39,7 @@ void UpdateField()
 		{
 			if (ite->Collide(ite2->GetTranslation(), 1))
 			{
-				ite2->SetDefeated(true);
+				ite2->SetDefeated();
 				ite->SetHit(true);
 			}
 		}
@@ -84,12 +84,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPTSTR, int) {
 	ChangeLightTypePoint(VGet(0, 100, 0), 10000, 1, 0, 0);
 	SetLightAmbColor(GetColorF(1.0f, 1.0f, 1.0f, 0.0f));
 
-	ObjectField::getObjectField().Enemies.push_back(Enemy(VGet(0, 0, 0), VGet(0, 100, 0), ENEMY_TYPE_EMISSION));
+	//ObjectField::getObjectField().Enemies.push_back(Enemy(VGet(0, 0, 0), VGet(0, 100, 0), ENEMY_TYPE_EMISSION));
 
+	int cnt = 0;
 
 	while (ProcessMessage() == 0)
 	{
 		ClsDrawScreen();
+
+		if ((cnt+200) % 300 == 0) ObjectField::getObjectField().Enemies.push_back(Enemy(VGet(0, 0, 0), VGet(0, 100, 0), ENEMY_TYPE_EMISSION));
 
 		GetHitKeyStateAll(buf);
 
@@ -112,6 +115,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPTSTR, int) {
 
 		if (buf[KEY_INPUT_ESCAPE]) break;
 		ScreenFlip();
+
+		++cnt;
 	}
 
 	DxLib_End();
