@@ -13,6 +13,11 @@ class ResourceHandles
 		EnemyBulletHandle = MV1LoadModel("enemyBullet.x");
 		HormingBulletHandle = MV1LoadModel("hormingBullet.x");
 		EnemyHandle = MV1LoadModel("ufo.x");
+
+		RadarPictureHandle = LoadGraph("radar.png");
+		playerIconHandle = LoadGraph("red_icon.png");
+		ufoIconHandle = LoadGraph("red_icon.png");
+		pFontHandle = CreateFontToHandle(NULL, 10, 1);
 	}
 public:
 	static ResourceHandles& getResourceHandles()
@@ -28,4 +33,9 @@ public:
 	int PlayerBulletHandle;
 	int EnemyBulletHandle;
 	int HormingBulletHandle;
+
+	int RadarPictureHandle;
+	int playerIconHandle;
+	int ufoIconHandle;
+	int pFontHandle;
 };

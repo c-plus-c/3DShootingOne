@@ -4,6 +4,7 @@
 #include "ObjectField.h"
 
 extern void DrawBackground();
+extern void DrawRadar();
 
 void UpdateField()
 {
@@ -101,6 +102,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPTSTR, int) {
 
 		ObjectField::getObjectField().player.Draw();
 		DrawField();
+
+		DrawRadar();
 
 		ObjectField &field = ObjectField::getObjectField();
 		field.EnemyBullet.erase(remove_if(field.EnemyBullet.begin(), field.EnemyBullet.end(), Bullet_Erase), field.EnemyBullet.end());
