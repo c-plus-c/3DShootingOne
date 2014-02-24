@@ -35,7 +35,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPTSTR, int) {
 
 		GetHitKeyStateAll(buf);
 
-		DrawBox(0, 0, 800, 600, GetColor(144, 215, 236), 1);
+		DrawBox(0, 0, 800, 600, GetColor(0, 0, 0), 1);
 
 		DrawBackground();
 
