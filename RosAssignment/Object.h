@@ -19,4 +19,6 @@ public:
 	VECTOR GetDirection();
 
 	virtual bool GetExpired() = 0;
+
+	virtual bool Collide(VECTOR translation, float radius) = 0;
 };

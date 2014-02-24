@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "Bullet.h"
+#include "Enemy.h"
 
 class ObjectField
 {
@@ -17,4 +18,5 @@ public:
 
 	std::vector<Bullet> PlayerBullet;
 	std::vector<Bullet> EnemyBullet;
+	std::vector<Enemy> Enemies;
 };

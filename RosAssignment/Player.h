@@ -40,7 +40,7 @@
 
 #define SHOT_HANDI 180
 
-class Player : Object
+class Player : public Object
 {
 	float _pitch;
 	float _roll;
@@ -65,4 +65,5 @@ public:
 	virtual void Update(char input []);
 	virtual void Draw();
 	virtual bool GetExpired();
+	virtual bool Collide(VECTOR translation, float radius);
 };

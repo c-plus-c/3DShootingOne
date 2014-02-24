@@ -111,7 +111,7 @@ void Player::_manualMove(char buf [])
 
 	if (buf[KEY_INPUT_Z] == 1&&_shotLockCount>SHOT_HANDI)
 	{
-		ObjectField::getObjectField().PlayerBullet.push_back(Bullet(_direction, _translation, 1, 3, false, BULLET_TYPE_PLAYER));
+		ObjectField::getObjectField().PlayerBullet.push_back(Bullet(_direction, _translation, 1, 3, BULLET_TYPE_PLAYER_HORMING));
 		_shotLockCount = 0;
 	}
 }
@@ -193,7 +193,7 @@ void Player::Update(char input[])
 	p2 /= 1.5;
 
 	f = abs(cr)*25.0 / DX_PI;
-	fovy = 25.0 + f;
+	fovy = 45.0 + f;
 
 	SetupCamera_Perspective(fovy * DX_PI_F / 180.0f);
 	SetCameraPositionAndTargetAndUpVec(c, t, u);
@@ -221,6 +221,11 @@ void Player::Draw()
 }
 
 bool Player::GetExpired()
+{
+	return false;
+}
+
+bool Player::Collide(VECTOR translation, float radius)
 {
 	return false;
 }

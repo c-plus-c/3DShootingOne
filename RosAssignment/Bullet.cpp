@@ -1,19 +1,46 @@
 #include "Bullet.h"
+#include "ObjectField.h"
 
-Bullet::Bullet(VECTOR direction, VECTOR translation, int damage, float speed,  bool horming,BULLET_TYPE bulletType)
+Bullet::Bullet(VECTOR direction, VECTOR translation, int damage, float speed,  BULLET_TYPE bulletType)
 :Object(direction,translation)
 {
 	_damage = damage;
 	_speed = speed;
-	_horming = horming;
 	_bulletType = bulletType;
 	_count = 0;
+
+	if (_bulletType == BULLET_TYPE_PLAYER_HORMING)
+	{
+		float mdist = 10000000;
+		auto &field = ObjectField::getObjectField().Enemies;
+
+		for (auto f = field.begin(); f != field.end(); ++f)
+		{
+			VECTOR v = VSub(_translation, f->GetTranslation());
+			float dist = VDot(v, v);
+			if (mdist > dist)
+			{
+				mdist = dist;
+				_targetEnemy = &(*f);
+			}
+		}
+	}
 }
 
 void Bullet::Update(char input[])
 {
+	if (_bulletType == BULLET_TYPE_PLAYER_HORMING&&_targetEnemy!=NULL)
+	{
+		VECTOR c;
+		c = VSub(_targetEnemy->GetTranslation(), _translation);
+		c = VNorm(c);
+		c = VScale(c, _count*(5.0 / 180.0));
+		_direction = VAdd(c, _direction);
+		_direction = VNorm(_direction);
+	}
+
 	_translation = VAdd(_translation, VScale(_direction, _speed));
-	_count;
+	++_count;
 }
 
 void Bullet::Draw()
@@ -55,10 +82,20 @@ float Bullet::GetSpeed()
 
 bool Bullet::GetExpired()
 {
-	return (_count >= 300);
+	return ((_bulletType == BULLET_TYPE_PLAYER_HORMING&&_targetEnemy == NULL) || (_count >= BULLET_EXPIRE_COUNT) || _hit);
 }
 
 bool Bullet_Erase(Bullet bullet)
 {
 	return bullet.GetExpired();
+}
+
+bool Bullet::SetHit(bool hit)
+{
+	_hit = hit;
+}
+
+bool Bullet::Collide(VECTOR translation, float radius)
+{
+	return false;
 }

@@ -19,6 +19,12 @@ void UpdateField()
 	{
 		ite->Update(NULL);
 	}
+
+	auto &enemies = ObjectField::getObjectField().Enemies;
+	for (auto ite = enemies.begin(); ite != enemies.end(); ++ite)
+	{
+		ite->Update(NULL);
+	}
 }
 
 void DrawField()
@@ -31,6 +37,12 @@ void DrawField()
 
 	auto &pbullets = ObjectField::getObjectField().PlayerBullet;
 	for (auto ite = pbullets.begin(); ite != pbullets.end(); ++ite)
+	{
+		ite->Draw();
+	}
+
+	auto &enemies = ObjectField::getObjectField().Enemies;
+	for (auto ite = enemies.begin(); ite != enemies.end(); ++ite)
 	{
 		ite->Draw();
 	}
@@ -52,6 +64,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPTSTR, int) {
 	SetLightEnable(TRUE);
 	ChangeLightTypePoint(VGet(0, 100, 0), 10000, 1, 0, 0);
 	SetLightAmbColor(GetColorF(1.0f, 1.0f, 1.0f, 0.0f));
+
+	ObjectField::getObjectField().Enemies.push_back(Enemy(VGet(0, 0, 0), VGet(0, 100, 0), ENEMY_TYPE_EMISSION));
+
+
 	while (ProcessMessage() == 0)
 	{
 		ClsDrawScreen();

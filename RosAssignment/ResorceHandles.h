@@ -12,6 +12,7 @@ class ResourceHandles
 		PlayerBulletHandle = MV1LoadModel("playerBullet.x");
 		EnemyBulletHandle = MV1LoadModel("enemyBullet.x");
 		HormingBulletHandle = MV1LoadModel("hormingBullet.x");
+		EnemyHandle = MV1LoadModel("ufo.x");
 	}
 public:
 	static ResourceHandles& getResourceHandles()
@@ -22,6 +23,7 @@ public:
 	int PlayerHandle;
 	int SkyHandle;
 	int CloudHandle;
+	int EnemyHandle;
 
 	int PlayerBulletHandle;
 	int EnemyBulletHandle;

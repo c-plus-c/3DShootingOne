@@ -84,12 +84,14 @@
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="DrawBackground.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectField.h" />
     <ClInclude Include="Player.h" />
