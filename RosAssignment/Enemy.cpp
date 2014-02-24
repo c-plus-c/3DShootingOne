@@ -28,5 +28,7 @@ bool Enemy::GetExpired()
 
 bool Enemy::Collide(VECTOR translation, float radius)
 {
-	return false;
+	VECTOR sub = VSub(_translation, translation);
+	float dist = VDot(sub, sub);
+	return dist <= (radius + 3)*(radius + 3);
 }

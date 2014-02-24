@@ -90,12 +90,14 @@ bool Bullet_Erase(Bullet bullet)
 	return bullet.GetExpired();
 }
 
-bool Bullet::SetHit(bool hit)
+void Bullet::SetHit(bool hit)
 {
 	_hit = hit;
 }
 
 bool Bullet::Collide(VECTOR translation, float radius)
 {
-	return false;
+	VECTOR sub = VSub(_translation, translation);
+	float dist = VDot(sub, sub);
+	return dist <= (radius + 0.3)*(radius + 0.3);
 }

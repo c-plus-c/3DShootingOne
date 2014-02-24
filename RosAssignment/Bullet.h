@@ -28,7 +28,7 @@ public:
 	virtual void Draw();
 	virtual bool GetExpired();
 	
-	bool SetHit(bool hit);
+	void SetHit(bool hit);
 	int GetDamage();
 	float GetSpeed();
 	virtual bool Collide(VECTOR translation, float radius);

@@ -227,5 +227,7 @@ bool Player::GetExpired()
 
 bool Player::Collide(VECTOR translation, float radius)
 {
-	return false;
+	VECTOR sub = VSub(_translation, translation);
+	float dist = VDot(sub, sub);
+	return dist <= (radius + 1)*(radius + 1);
 }
