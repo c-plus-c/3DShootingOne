@@ -1,6 +1,5 @@
 #include "Player.h"
-
-extern int playerHandle;
+#include "ObjectField.h"
 
 Player::Player(VECTOR translation, float pitch, float roll, float yaw)
 :Object(VGet(0,0,0),translation)
@@ -206,7 +205,7 @@ void Player::Draw()
 	matrix = MMult(matrix, MGetRotAxis(_direction, _roll));
 	matrix = MMult(matrix, MGetTranslate(_translation));
 
-	MV1SetMatrix(playerHandle, matrix);
+	MV1SetMatrix(ObjectField::getInstance().PlayerHandle, matrix);
 
-	MV1DrawModel(playerHandle);
+	MV1DrawModel(ObjectField::getInstance().PlayerHandle);
 }

@@ -1,10 +1,6 @@
 #include "dxlib.h"
 
-#include "Player.h"
-
-int playerHandle;
-int skyHandle;
-int cloudHandle;
+#include "ObjectField.h"
 
 extern void DrawBackground();
 
@@ -18,9 +14,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPTSTR, int) {
 	SetDrawScreen(DX_SCREEN_BACK);
 	SetUseZBuffer3D(TRUE);
 
-	playerHandle = MV1LoadModel("plane3.x");
-	skyHandle = MV1LoadModel("sky.x");
-	cloudHandle = MV1LoadModel("bottomcloud.x");
+
+	ObjectField::getInstance().PlayerHandle = MV1LoadModel("plane3.x");
+	ObjectField::getInstance().SkyHandle = MV1LoadModel("sky.x");
+	ObjectField::getInstance().CloudHandle = MV1LoadModel("bottomcloud.x");
 
 	char buf[256];
 	Player player = Player(VGet(0, 100, 0), 0, 0, 0);
