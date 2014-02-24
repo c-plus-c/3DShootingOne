@@ -1,13 +1,13 @@
 #include "DxLib.h"
-#include "ObjectField.h"
+#include "ResorceHandles.h"
 
 void DrawBackground()
 {
 	SetUseLighting(FALSE);
-	MV1SetScale(ObjectField::getInstance().SkyHandle, VGet(500, 500, 500));
-	MV1DrawModel(ObjectField::getInstance().SkyHandle);
+	MV1SetScale(ResourceHandles::getResourceHandles().SkyHandle, VGet(500, 500, 500));
+	MV1DrawModel(ResourceHandles::getResourceHandles().SkyHandle);
 
 	SetUseLighting(FALSE);
-	MV1SetScale(ObjectField::getInstance().CloudHandle, VGet(550, 40, 550));
-	MV1DrawModel(ObjectField::getInstance().CloudHandle);
+	MV1SetScale(ResourceHandles::getResourceHandles().CloudHandle, VGet(550, 40, 550));
+	MV1DrawModel(ResourceHandles::getResourceHandles().CloudHandle);
 }

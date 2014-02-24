@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "ResorceHandles.h"
 #include "ObjectField.h"
 
 Player::Player(VECTOR translation, float pitch, float roll, float yaw)
@@ -14,6 +15,8 @@ Player::Player(VECTOR translation, float pitch, float roll, float yaw)
 
 	_sideOut = false;
 	_count = 0;
+
+	_shotLockCount = SHOT_HANDI + 1;
 
 	SetCameraNearFar(0.1, 10000);
 }
@@ -105,6 +108,12 @@ void Player::_manualMove(char buf [])
 		_brakeVariable -= BRAKEINCREMENTATION;
 		_brakeVariable = max(BRAKEMIN, _brakeVariable);
 	}
+
+	if (buf[KEY_INPUT_Z] == 1&&_shotLockCount>SHOT_HANDI)
+	{
+		ObjectField::getObjectField().PlayerBullet.push_back(Bullet(_direction, _translation, 1, 3, false, BULLET_TYPE_PLAYER));
+		_shotLockCount = 0;
+	}
 }
 
 void Player::_autoMove()
@@ -191,6 +200,7 @@ void Player::Update(char input[])
 	//SetCameraPositionAndTargetAndUpVec(VGet(10, 10, 10), _translation, VGet(0, 1, 0));
 
 	++_count;
+	++_shotLockCount;
 }
 
 
@@ -205,7 +215,12 @@ void Player::Draw()
 	matrix = MMult(matrix, MGetRotAxis(_direction, _roll));
 	matrix = MMult(matrix, MGetTranslate(_translation));
 
-	MV1SetMatrix(ObjectField::getInstance().PlayerHandle, matrix);
+	MV1SetMatrix(ResourceHandles::getResourceHandles().PlayerHandle, matrix);
 
-	MV1DrawModel(ObjectField::getInstance().PlayerHandle);
+	MV1DrawModel(ResourceHandles::getResourceHandles().PlayerHandle);
+}
+
+bool Player::GetExpired()
+{
+	return false;
 }

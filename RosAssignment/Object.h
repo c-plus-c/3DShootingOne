@@ -8,7 +8,6 @@ class Object
 protected:
 	VECTOR _translation;
 	VECTOR _direction;
-
 public:
 	Object(VECTOR direction, VECTOR translation);
 
@@ -18,4 +17,6 @@ public:
 	VECTOR GetTranslation();
 
 	VECTOR GetDirection();
+
+	virtual bool GetExpired() = 0;
 };

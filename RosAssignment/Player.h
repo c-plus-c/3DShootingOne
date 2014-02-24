@@ -38,6 +38,7 @@
 #define ACTIVE_LOWEST 40
 #define ACTIVE_RADIUS 200
 
+#define SHOT_HANDI 180
 
 class Player : Object
 {
@@ -53,6 +54,8 @@ class Player : Object
 
 	int _count;
 
+	int _shotLockCount;
+
 	void _manualMove(char buf []);
 	void _autoMove();
 
@@ -61,4 +64,5 @@ public:
 
 	virtual void Update(char input []);
 	virtual void Draw();
+	virtual bool GetExpired();
 };

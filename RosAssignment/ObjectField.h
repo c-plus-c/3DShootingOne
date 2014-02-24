@@ -1,14 +1,15 @@
 #pragma once
 
 #include <vector>
-#include "Player.h"
 #include "Bullet.h"
 
 class ObjectField
 {
-	ObjectField(){}
+	ObjectField()
+	{
+	}
 public:
-	static ObjectField& getInstance()
+	static ObjectField& getObjectField()
 	{
 		static ObjectField objectField;
 		return objectField;
@@ -16,8 +17,4 @@ public:
 
 	std::vector<Bullet> PlayerBullet;
 	std::vector<Bullet> EnemyBullet;
-
-	int PlayerHandle;
-	int SkyHandle;
-	int CloudHandle;
 };

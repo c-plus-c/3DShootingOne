@@ -1,8 +1,40 @@
 #include "dxlib.h"
 
+#include <algorithm>
 #include "ObjectField.h"
+#include "Player.h"
 
 extern void DrawBackground();
+
+void UpdateField()
+{
+	auto &ebullets = ObjectField::getObjectField().EnemyBullet;
+	for (auto ite = ebullets.begin(); ite != ebullets.end(); ++ite)
+	{
+		ite->Update(NULL);
+	}
+
+	auto &pbullets = ObjectField::getObjectField().PlayerBullet;
+	for (auto ite = pbullets.begin(); ite != pbullets.end(); ++ite)
+	{
+		ite->Update(NULL);
+	}
+}
+
+void DrawField()
+{
+	auto &ebullets = ObjectField::getObjectField().EnemyBullet;
+	for (auto ite = ebullets.begin(); ite != ebullets.end(); ++ite)
+	{
+		ite->Draw();
+	}
+
+	auto &pbullets = ObjectField::getObjectField().PlayerBullet;
+	for (auto ite = pbullets.begin(); ite != pbullets.end(); ++ite)
+	{
+		ite->Draw();
+	}
+}
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPTSTR, int) {
 	
@@ -14,15 +46,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPTSTR, int) {
 	SetDrawScreen(DX_SCREEN_BACK);
 	SetUseZBuffer3D(TRUE);
 
-
-	ObjectField::getInstance().PlayerHandle = MV1LoadModel("plane3.x");
-	ObjectField::getInstance().SkyHandle = MV1LoadModel("sky.x");
-	ObjectField::getInstance().CloudHandle = MV1LoadModel("bottomcloud.x");
-
 	char buf[256];
 	Player player = Player(VGet(0, 100, 0), 0, 0, 0);
 
-	//SetGlobalAmbientLight(GetColorF(1.0f, 1.0f, 1.0f, 0.0f));
 	SetLightEnable(TRUE);
 	ChangeLightTypePoint(VGet(0, 100, 0), 10000, 1, 0, 0);
 	SetLightAmbColor(GetColorF(1.0f, 1.0f, 1.0f, 0.0f));
@@ -37,8 +63,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPTSTR, int) {
 		DrawBackground();
 
 		player.Update(buf);
+		UpdateField();
 
 		player.Draw();
+		DrawField();
+
+		ObjectField &field = ObjectField::getObjectField();
+		field.EnemyBullet.erase(remove_if(field.EnemyBullet.begin(), field.EnemyBullet.end(), Bullet_Erase), field.EnemyBullet.end());
+		field.PlayerBullet.erase(remove_if(field.PlayerBullet.begin(), field.PlayerBullet.end(), Bullet_Erase), field.PlayerBullet.end());
 
 		if (buf[KEY_INPUT_ESCAPE]) break;
 		ScreenFlip();
