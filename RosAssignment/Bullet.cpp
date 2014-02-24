@@ -25,6 +25,7 @@ Bullet::Bullet(VECTOR direction, VECTOR translation, int damage, float speed,  B
 			}
 		}
 	}
+	_hit = false;
 }
 
 void Bullet::Update(char input[])

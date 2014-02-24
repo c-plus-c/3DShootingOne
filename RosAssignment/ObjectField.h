@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "Player.h"
 #include "Bullet.h"
 #include "Enemy.h"
 
@@ -15,7 +16,7 @@ public:
 		static ObjectField objectField;
 		return objectField;
 	}
-
+	Player player;
 	std::vector<Bullet> PlayerBullet;
 	std::vector<Bullet> EnemyBullet;
 	std::vector<Enemy> Enemies;

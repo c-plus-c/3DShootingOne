@@ -17,6 +17,8 @@ Player::Player(VECTOR translation, float pitch, float roll, float yaw)
 	_count = 0;
 
 	_shotLockCount = SHOT_HANDI + 1;
+	_incivibleCount = 0;
+	_playerState = PLAYER_STATE_NORMAL;
 
 	SetCameraNearFar(0.1, 10000);
 }
@@ -197,18 +199,28 @@ void Player::Update(char input[])
 
 	SetupCamera_Perspective(fovy * DX_PI_F / 180.0f);
 	SetCameraPositionAndTargetAndUpVec(c, t, u);
-	//SetCameraPositionAndTargetAndUpVec(VGet(10, 10, 10), _translation, VGet(0, 1, 0));
 
 	++_count;
 	++_shotLockCount;
+
+	if (_playerState == PLAYER_STATE_INCIVIBLE)
+	{
+		++_incivibleCount;
+		if (_incivibleCount >= INCIVIBLE_TERM)
+		{
+			_incivibleCount = 0;
+			_playerState = PLAYER_STATE_NORMAL;
+		}
+	}
+
 }
 
 
 void Player::Draw()
 {
-	SetUseLighting(FALSE);
-	//SetUseLighting(TRUE);
+	if (_playerState != PLAYER_STATE_NORMAL && _count % 2 == 0) return;
 
+	SetUseLighting(FALSE);
 	MATRIX matrix;
 	matrix = MGetRotAxis(VGet(1, 0, 0), _pitch);
 	matrix = MMult(matrix, MGetRotAxis(VGet(0, 1, 0), _yaw));
@@ -230,4 +242,13 @@ bool Player::Collide(VECTOR translation, float radius)
 	VECTOR sub = VSub(_translation, translation);
 	float dist = VDot(sub, sub);
 	return dist <= (radius + 1)*(radius + 1);
+}
+
+void Player::Damage(int damage)
+{
+	if (_playerState == PLAYER_STATE_NORMAL)
+	{
+		_life -= damage;
+		_playerState = PLAYER_STATE_INCIVIBLE;
+	}
 }

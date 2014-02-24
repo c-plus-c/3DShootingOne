@@ -2,7 +2,6 @@
 
 #include <algorithm>
 #include "ObjectField.h"
-#include "Player.h"
 
 extern void DrawBackground();
 
@@ -12,18 +11,37 @@ void UpdateField()
 	for (auto ite = ebullets.begin(); ite != ebullets.end(); ++ite)
 	{
 		ite->Update(NULL);
-	}
 
-	auto &pbullets = ObjectField::getObjectField().PlayerBullet;
-	for (auto ite = pbullets.begin(); ite != pbullets.end(); ++ite)
-	{
-		ite->Update(NULL);
+		if (ObjectField::getObjectField().player.Collide(ite->GetTranslation(), 0.3))
+		{
+			ObjectField::getObjectField().player.Damage(1);
+			ite->SetHit(true);
+		}
 	}
 
 	auto &enemies = ObjectField::getObjectField().Enemies;
 	for (auto ite = enemies.begin(); ite != enemies.end(); ++ite)
 	{
 		ite->Update(NULL);
+		if (ObjectField::getObjectField().player.Collide(ite->GetTranslation(), 0.5))
+		{
+			ObjectField::getObjectField().player.Damage(1);
+			ite->SetDefeated(true);
+		}
+	}
+
+	auto &pbullets = ObjectField::getObjectField().PlayerBullet;
+	for (auto ite = pbullets.begin(); ite != pbullets.end(); ++ite)
+	{
+		ite->Update(NULL);
+		for (auto ite2 = enemies.begin(); ite2 != enemies.end(); ++ite2)
+		{
+			if (ite->Collide(ite2->GetTranslation(), 1))
+			{
+				ite2->SetDefeated(true);
+				ite->SetHit(true);
+			}
+		}
 	}
 }
 
@@ -35,14 +53,14 @@ void DrawField()
 		ite->Draw();
 	}
 
-	auto &pbullets = ObjectField::getObjectField().PlayerBullet;
-	for (auto ite = pbullets.begin(); ite != pbullets.end(); ++ite)
+	auto &enemies = ObjectField::getObjectField().Enemies;
+	for (auto ite = enemies.begin(); ite != enemies.end(); ++ite)
 	{
 		ite->Draw();
 	}
 
-	auto &enemies = ObjectField::getObjectField().Enemies;
-	for (auto ite = enemies.begin(); ite != enemies.end(); ++ite)
+	auto &pbullets = ObjectField::getObjectField().PlayerBullet;
+	for (auto ite = pbullets.begin(); ite != pbullets.end(); ++ite)
 	{
 		ite->Draw();
 	}
@@ -59,7 +77,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPTSTR, int) {
 	SetUseZBuffer3D(TRUE);
 
 	char buf[256];
-	Player player = Player(VGet(0, 100, 0), 0, 0, 0);
+	ObjectField::getObjectField().player = Player(VGet(10, 100, 0), 0, 0, 0);
 
 	SetLightEnable(TRUE);
 	ChangeLightTypePoint(VGet(0, 100, 0), 10000, 1, 0, 0);
@@ -78,15 +96,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPTSTR, int) {
 
 		DrawBackground();
 
-		player.Update(buf);
+		ObjectField::getObjectField().player.Update(buf);
 		UpdateField();
 
-		player.Draw();
+		ObjectField::getObjectField().player.Draw();
 		DrawField();
 
 		ObjectField &field = ObjectField::getObjectField();
 		field.EnemyBullet.erase(remove_if(field.EnemyBullet.begin(), field.EnemyBullet.end(), Bullet_Erase), field.EnemyBullet.end());
 		field.PlayerBullet.erase(remove_if(field.PlayerBullet.begin(), field.PlayerBullet.end(), Bullet_Erase), field.PlayerBullet.end());
+		field.Enemies.erase(remove_if(field.Enemies.begin(), field.Enemies.end(), Enemy_Erase), field.Enemies.end());
 
 		if (buf[KEY_INPUT_ESCAPE]) break;
 		ScreenFlip();

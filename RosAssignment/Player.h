@@ -39,9 +39,19 @@
 #define ACTIVE_RADIUS 200
 
 #define SHOT_HANDI 180
+#define INCIVIBLE_TERM 150
+
+enum PLAYER_STATE
+{
+	PLAYER_STATE_NORMAL,
+	PLAYER_STATE_INCIVIBLE,
+	PLAYER_STATE_DYING
+};
 
 class Player : public Object
 {
+	int _life;
+
 	float _pitch;
 	float _roll;
 	float _yaw;
@@ -59,11 +69,18 @@ class Player : public Object
 	void _manualMove(char buf []);
 	void _autoMove();
 
+	PLAYER_STATE _playerState;
+	int _incivibleCount;
+	
+
 public:
+	Player(){}
 	Player(VECTOR translation,float pitch,float roll,float yaw);
 
 	virtual void Update(char input []);
 	virtual void Draw();
 	virtual bool GetExpired();
 	virtual bool Collide(VECTOR translation, float radius);
+
+	void Damage(int damage);
 };

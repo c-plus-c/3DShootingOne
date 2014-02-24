@@ -6,6 +6,7 @@ Enemy::Enemy(VECTOR direction, VECTOR translation, ENEMY_TYPE enemyType)
 {
 	_enemyType = enemyType;
 	_count = 0;
+	_defeated = false;
 }
 
 void Enemy::Update(char input[])
@@ -23,7 +24,12 @@ void Enemy::Draw()
 
 bool Enemy::GetExpired()
 {
-	return false;
+	return _defeated;
+}
+
+void Enemy::SetDefeated(bool defeated)
+{
+	_defeated = defeated;
 }
 
 bool Enemy::Collide(VECTOR translation, float radius)
@@ -31,4 +37,9 @@ bool Enemy::Collide(VECTOR translation, float radius)
 	VECTOR sub = VSub(_translation, translation);
 	float dist = VDot(sub, sub);
 	return dist <= (radius + 3)*(radius + 3);
+}
+
+bool Enemy_Erase(Enemy enemy)
+{
+	return enemy.GetExpired();
 }

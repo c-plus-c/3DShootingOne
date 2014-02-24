@@ -9,6 +9,7 @@ protected:
 	VECTOR _translation;
 	VECTOR _direction;
 public:
+	Object(){}
 	Object(VECTOR direction, VECTOR translation);
 
 	virtual void Update(char input []) = 0;
