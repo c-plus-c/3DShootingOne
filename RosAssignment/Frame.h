@@ -11,7 +11,7 @@ enum SCENE
 #define ADDITION_CYCLE 60*7
 
 #define DEFEAT_SCORE 100
-#define LEVELUP 500
+#define LEVELUP_SCORE 500
 
 class Frame
 {
@@ -34,6 +34,7 @@ class Frame
 
 	void DrawBackground();
 	void DrawRadar();
+	void DrawStatus();
 
 	Frame();
 public:

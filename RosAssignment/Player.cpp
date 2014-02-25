@@ -16,7 +16,7 @@ Player::Player(VECTOR translation, float pitch, float roll, float yaw)
 	_sideOut = false;
 	_count = 0;
 
-	_shotLockCount = SHOT_HANDI + 1;
+	_shotLockCount = 0;
 	_incivibleCount = 0;
 	_playerState = PLAYER_STATE_NORMAL;
 
@@ -112,6 +112,11 @@ void Player::_manualMove(char buf [])
 	}
 
 	if (buf[KEY_INPUT_Z] == 1&&_shotLockCount>SHOT_HANDI)
+	{
+		ObjectField::getObjectField().PlayerBullet.push_back(Bullet(_direction, _translation, 1, 3, BULLET_TYPE_PLAYER));
+		_shotLockCount = 0;
+	}
+	else if (buf[KEY_INPUT_A] == 1 && _shotLockCount > SHOT_HANDI * 4)
 	{
 		ObjectField::getObjectField().PlayerBullet.push_back(Bullet(_direction, _translation, 1, 3, BULLET_TYPE_PLAYER_HORMING));
 		_shotLockCount = 0;

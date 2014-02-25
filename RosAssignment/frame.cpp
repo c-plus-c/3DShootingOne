@@ -44,7 +44,7 @@ void Frame::Play()
 {
 	if (_count%ADDITION_CYCLE == 0) AddNewObjects();
 
-	_level = _score / DEFEAT_SCORE + 1;
+	_level = _score / LEVELUP_SCORE + 1;
 
 	ObjectField::getObjectField().player.Update(buf);
 	UpdateField();
@@ -57,6 +57,7 @@ void Frame::Play()
 	DrawField();
 
 	DrawRadar();
+	DrawStatus();
 
 	ObjectField &field = ObjectField::getObjectField();
 	field.EnemyBullet.erase(remove_if(field.EnemyBullet.begin(), field.EnemyBullet.end(), Bullet_Erase), field.EnemyBullet.end());
@@ -77,7 +78,7 @@ void Frame::Pause()
 void Frame::AddNewObjects()
 {
 
-	int enemySum = 15 * (1 - 1 / exp(_level / 2.5));
+	int enemySum = 15 * (1 - 1 / exp(_level / 10.0));
 
 	int addSum = enemySum - (int)ObjectField::getObjectField().Enemies.size();
 
@@ -210,4 +211,10 @@ void Frame::InitializeGame()
 bool Frame::End()
 {
 	return _end;
+}
+
+void Frame::DrawStatus()
+{
+	DrawFormatString(10, 10, GetColor(255, 255, 255), "Level : %d", _level);
+	DrawFormatString(100, 10, GetColor(255, 255, 255), "Score : %d", _score);
 }
