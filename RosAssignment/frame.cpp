@@ -201,7 +201,15 @@ void Frame::DrawRadar()
 	for (auto ite = enemies.begin(); ite != enemies.end(); ++ite)
 	{
 		VECTOR ptrans = ite->GetTranslation();
-		DrawRotaGraph(692 + 92 * (ptrans.x / ACTIVE_RADIUS), 493 - 92 * (ptrans.z / ACTIVE_RADIUS), 0.45, 0, ResourceHandles::getResourceHandles().playerIconHandle, 1);
+		DrawRotaGraph(692 + 92 * (ptrans.x / ACTIVE_RADIUS), 493 - 92 * (ptrans.z / ACTIVE_RADIUS), 0.45, 0, ResourceHandles::getResourceHandles().ufoIconHandle, 1);
+		DrawFormatString(692 + 92 * (ptrans.x / ACTIVE_RADIUS) - 25, 493 - 92 * (ptrans.z / ACTIVE_RADIUS) - 25, GetColor(255, 255, 255), "%d", (int) ptrans.y);
+	}
+
+	auto &ebullets = ObjectField::getObjectField().EnemyBullet;
+	for (auto ite = ebullets.begin(); ite != ebullets.end(); ++ite)
+	{
+		VECTOR ptrans = ite->GetTranslation();
+		DrawRotaGraph(692 + 92 * (ptrans.x / ACTIVE_RADIUS), 493 - 92 * (ptrans.z / ACTIVE_RADIUS), 0.45, 0, ResourceHandles::getResourceHandles().BulletIconHandle, 1);
 		DrawFormatString(692 + 92 * (ptrans.x / ACTIVE_RADIUS) - 25, 493 - 92 * (ptrans.z / ACTIVE_RADIUS) - 25, GetColor(255, 255, 255), "%d", (int) ptrans.y);
 	}
 }

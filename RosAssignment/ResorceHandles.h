@@ -16,11 +16,13 @@ class ResourceHandles
 
 		RadarPictureHandle = LoadGraph("radar.png");
 		playerIconHandle = LoadGraph("red_icon.png");
-		ufoIconHandle = LoadGraph("red_icon.png");
+		ufoIconHandle = LoadGraph("ufo_icon.png");
 		pFontHandle = CreateFontToHandle(NULL, 10, 1);
 
 		MagicSquareHandle = LoadGraph("magic_square.png");
 		LoadDivGraph("exp.png", 40, 4, 10, 301, 247, ExplosionHandle);
+
+		BulletIconHandle = LoadGraph("bullet_icon.png");
 
 		TopPicture = LoadGraph("top.png");
 	}
@@ -43,6 +45,7 @@ public:
 	int playerIconHandle;
 	int ufoIconHandle;
 	int pFontHandle;
+	int BulletIconHandle;
 
 	int MagicSquareHandle;
 	int ExplosionHandle[40];
