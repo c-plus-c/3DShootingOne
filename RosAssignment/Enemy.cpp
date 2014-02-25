@@ -52,10 +52,6 @@ void Enemy::Draw()
 		DrawBillboard3D(_translation, 0.5f, 0.5f, _radius*3, 0, ResourceHandles::getResourceHandles().ExplosionHandle[_count], TRUE);
 		break;
 	}
-
-
-
-	//
 }
 
 bool Enemy::GetExpired()
@@ -74,6 +70,11 @@ bool Enemy::Collide(VECTOR translation, float radius)
 	VECTOR sub = VSub(_translation, translation);
 	float dist = VDot(sub, sub);
 	return dist <= (radius + _radius)*(radius + _radius);
+}
+
+float Enemy::GetRadius()
+{
+	return _radius;
 }
 
 bool Enemy_Erase(Enemy enemy)

@@ -31,6 +31,7 @@ public:
 	virtual bool Collide(VECTOR translation, float radius);
 
 	void SetDefeated();
+	float GetRadius();
 };
 
 bool Enemy_Erase(Enemy enemy);

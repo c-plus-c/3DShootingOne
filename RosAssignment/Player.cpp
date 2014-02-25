@@ -241,7 +241,7 @@ bool Player::Collide(VECTOR translation, float radius)
 {
 	VECTOR sub = VSub(_translation, translation);
 	float dist = VDot(sub, sub);
-	return dist <= (radius + 1)*(radius + 1);
+	return (dist <= (radius + 1)*(radius + 1));
 }
 
 void Player::Damage(int damage)

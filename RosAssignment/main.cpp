@@ -24,7 +24,8 @@ void UpdateField()
 	for (auto ite = enemies.begin(); ite != enemies.end(); ++ite)
 	{
 		ite->Update(NULL);
-		if (ObjectField::getObjectField().player.Collide(ite->GetTranslation(), 0.5))
+
+		if (ObjectField::getObjectField().player.Collide(ite->GetTranslation(), ite->GetRadius()*0.5))
 		{
 			ObjectField::getObjectField().player.Damage(1);
 			ite->SetDefeated();
@@ -37,7 +38,7 @@ void UpdateField()
 		ite->Update(NULL);
 		for (auto ite2 = enemies.begin(); ite2 != enemies.end(); ++ite2)
 		{
-			if (ite->Collide(ite2->GetTranslation(), 1))
+			if (ite->Collide(ite2->GetTranslation(), ite2->GetRadius()))
 			{
 				ite2->SetDefeated();
 				ite->SetHit(true);
