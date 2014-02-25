@@ -21,8 +21,9 @@ class Bullet:public Object
 	int _count;
 	Enemy *_targetEnemy;
 	bool _hit;
+	float _size;
 public:
-	Bullet(VECTOR direction, VECTOR translation,int damage,float speed,BULLET_TYPE bulletType);
+	Bullet(VECTOR direction, VECTOR translation,int damage,float speed,BULLET_TYPE bulletType,float size=0.3);
 
 	virtual void Update(char input []);
 	virtual void Draw();

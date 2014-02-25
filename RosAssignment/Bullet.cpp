@@ -1,10 +1,11 @@
 #include "Bullet.h"
 #include "ObjectField.h"
 
-Bullet::Bullet(VECTOR direction, VECTOR translation, int damage, float speed,  BULLET_TYPE bulletType)
+Bullet::Bullet(VECTOR direction, VECTOR translation, int damage, float speed,  BULLET_TYPE bulletType,float size)
 :Object(direction,translation)
 {
 	_damage = damage;
+	_size = size;
 	_speed = speed;
 	_bulletType = bulletType;
 	_count = 0;
@@ -41,6 +42,15 @@ void Bullet::Update(char input[])
 	}
 
 	_translation = VAdd(_translation, VScale(_direction, _speed));
+
+	if (_bulletType == BULLET_TYPE_ENEMY)
+	{
+		if ((_translation.x*_translation.x + _translation.z*_translation.z >= ACTIVE_RADIUS*ACTIVE_RADIUS) || _translation.y <= ACTIVE_LOWEST || _translation.y >= ACTIVE_HIGHEST)
+		{
+			_direction = VScale(_direction, -1);
+		}
+	}
+
 	++_count;
 }
 
@@ -52,17 +62,17 @@ void Bullet::Draw()
 	switch (_bulletType)
 	{
 	case BULLET_TYPE_ENEMY:
-		MV1SetScale(ResourceHandles::getResourceHandles().EnemyBulletHandle, VGet(0.3, 0.3, 0.3));
+		MV1SetScale(ResourceHandles::getResourceHandles().EnemyBulletHandle, VGet(_size, _size, _size));
 		MV1SetPosition(ResourceHandles::getResourceHandles().EnemyBulletHandle, _translation);
 		MV1DrawModel(ResourceHandles::getResourceHandles().EnemyBulletHandle);
 		break;
 	case BULLET_TYPE_PLAYER:
-		MV1SetScale(ResourceHandles::getResourceHandles().PlayerBulletHandle, VGet(0.3, 0.3, 0.3));
+		MV1SetScale(ResourceHandles::getResourceHandles().PlayerBulletHandle, VGet(_size, _size, _size));
 		MV1SetPosition(ResourceHandles::getResourceHandles().PlayerBulletHandle, _translation);
 		MV1DrawModel(ResourceHandles::getResourceHandles().PlayerBulletHandle);
 		break;
 	case BULLET_TYPE_PLAYER_HORMING:
-		MV1SetScale(ResourceHandles::getResourceHandles().HormingBulletHandle, VGet(0.3, 0.3, 0.3));
+		MV1SetScale(ResourceHandles::getResourceHandles().HormingBulletHandle, VGet(_size, _size, _size));
 		MV1SetPosition(ResourceHandles::getResourceHandles().HormingBulletHandle, _translation);
 		MV1DrawModel(ResourceHandles::getResourceHandles().HormingBulletHandle);
 		break;
@@ -100,5 +110,5 @@ bool Bullet::Collide(VECTOR translation, float radius)
 {
 	VECTOR sub = VSub(_translation, translation);
 	float dist = VDot(sub, sub);
-	return dist <= (radius + 0.3)*(radius + 0.3);
+	return dist <= (radius + _size)*(radius + _size);
 }

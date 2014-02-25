@@ -78,7 +78,7 @@ void Frame::Pause()
 void Frame::AddNewObjects()
 {
 
-	int enemySum = 15 * (1 - 1 / exp(_level / 10.0));
+	int enemySum = 30 * (1 - 1 / exp(_level / 10.0));
 
 	int addSum = enemySum - (int)ObjectField::getObjectField().Enemies.size();
 
@@ -91,9 +91,13 @@ void Frame::AddNewObjects()
 		float z = r*sin(theta);
 		float size = 10.0 + (rand() % 10);
 
+		float dx = rand() % 10;
+		float dy = rand() % 10;
+		float dz = rand() % 10;
 
+		float speed = (1.2*min(10,_level-1)/10)*rand() / 32768.0;
 
-		ObjectField::getObjectField().Enemies.push_back(Enemy(VGet(10, 5, 3), VGet(x, y, z), ENEMY_TYPE_EMISSION, size, 0.4, 300));
+		ObjectField::getObjectField().Enemies.push_back(Enemy(VGet(dx, dy, dz), VGet(x, y, z), ENEMY_TYPE_EMISSION, size, speed, 300));
 	}
 }
 
@@ -104,7 +108,7 @@ void Frame::UpdateField()
 	{
 		ite->Update(NULL);
 
-		if (ObjectField::getObjectField().player.Collide(ite->GetTranslation(), 0.3))
+		if (ite->Collide(ObjectField::getObjectField().player.GetTranslation(),1))
 		{
 			ObjectField::getObjectField().player.Damage(1);
 			ite->SetHit(true);
