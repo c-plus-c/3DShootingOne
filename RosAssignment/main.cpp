@@ -4,7 +4,7 @@
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPTSTR, int) {
 	
-	
+	SetMainWindowText("Endurance UFOz");
 	ChangeWindowMode(TRUE);
 	SetGraphMode(800, 600, 32);
 	if (DxLib_Init()<0) return -1;

@@ -38,6 +38,11 @@ void Frame::Top()
 		InitializeGame();
 		_scene = SCENE_PLAY;
 	}
+	else if (buf[KEY_INPUT_X])
+	{
+		_scene = SCENE_MANUAL;
+		_waitCount = 0;
+	}
 	else if (buf[KEY_INPUT_ESCAPE])
 	{
 		_end = true;
@@ -93,8 +98,15 @@ void Frame::Play()
 
 void Frame::Manual()
 {
+	DrawGraph(0, 0, ResourceHandles::getResourceHandles().ManualPicture, 0);
 
 	++_waitCount;
+	if (_waitCount <= 90) return;
+	if (buf[KEY_INPUT_Z])
+	{
+		_scene = SCENE_TOP;
+		_waitCount = 0;
+	}
 }
 
 void Frame::Pause()
