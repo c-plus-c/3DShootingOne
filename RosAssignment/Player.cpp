@@ -113,15 +113,17 @@ void Player::_manualMove(char buf [])
 		_brakeVariable = max(BRAKEMIN, _brakeVariable);
 	}
 
-	if (buf[KEY_INPUT_Z] == 1&&_shotLockCount>SHOT_HANDI)
+	if (buf[KEY_INPUT_Z] == 1&&_shotLockCount>=SHOT_HANDI)
 	{
 		ObjectField::getObjectField().PlayerBullet.push_back(Bullet(_direction, _translation, 1, 3, BULLET_TYPE_PLAYER));
 		_shotLockCount = 0;
+		PlaySoundMem(ResourceHandles::getResourceHandles().NormalBulletSound, DX_PLAYTYPE_BACK);
 	}
-	else if (buf[KEY_INPUT_A] == 1 && _shotLockCount > SHOT_HANDI * 4)
+	else if (buf[KEY_INPUT_A] == 1 && _shotLockCount >= HORMINGSHOT_HANDI)
 	{
 		ObjectField::getObjectField().PlayerBullet.push_back(Bullet(_direction, _translation, 1, 3, BULLET_TYPE_PLAYER_HORMING));
 		_shotLockCount = 0;
+		PlaySoundMem(ResourceHandles::getResourceHandles().HormingBulletSound, DX_PLAYTYPE_BACK);
 	}
 }
 
@@ -291,6 +293,7 @@ void Player::Damage(int damage)
 		_life -= damage;
 		if (_life == 0)
 		{
+			PlaySoundMem(ResourceHandles::getResourceHandles().PlayerDieSound, DX_PLAYTYPE_BACK);
 			_playerState = PLAYER_STATE_DYING;
 			_count = 0;
 		}

@@ -19,7 +19,7 @@ Frame::Frame()
 void Frame::DrawBackground()
 {
 	SetUseLighting(FALSE);
-	MV1SetScale(ResourceHandles::getResourceHandles().SkyHandle, VGet(ACTIVE_RADIUS * 5, ACTIVE_HIGHEST, ACTIVE_RADIUS * 5));
+	MV1SetScale(ResourceHandles::getResourceHandles().SkyHandle, VGet(ACTIVE_RADIUS * 5, ACTIVE_HIGHEST+15, ACTIVE_RADIUS * 5));
 	MV1DrawModel(ResourceHandles::getResourceHandles().SkyHandle);
 
 	SetUseLighting(FALSE);
@@ -37,6 +37,7 @@ void Frame::Top()
 	{
 		InitializeGame();
 		_scene = SCENE_PLAY;
+		PlaySoundMem(ResourceHandles::getResourceHandles().BGM, DX_PLAYTYPE_LOOP);
 	}
 	else if (buf[KEY_INPUT_X])
 	{
@@ -81,6 +82,7 @@ void Frame::Play()
 		++_waitCount;
 		if (_waitCount >= 90 && buf[KEY_INPUT_Z] == 1)
 		{
+			StopSoundMem(ResourceHandles::getResourceHandles().BGM);
 			_waitCount = 0;
 			_scene = SCENE_TOP;
 		}
@@ -123,6 +125,7 @@ void Frame::Pause()
 	{
 		_scene = SCENE_TOP;
 		_waitCount = 0;
+		StopSoundMem(ResourceHandles::getResourceHandles().BGM);
 	}
 	else if (buf[KEY_INPUT_C] == 1)
 	{
@@ -174,6 +177,7 @@ void Frame::UpdateField()
 		{
 			ObjectField::getObjectField().player.Damage(1);
 			ite->SetHit(true);
+			PlaySoundMem(ResourceHandles::getResourceHandles().PlayerHitSound, DX_PLAYTYPE_BACK);
 		}
 	}
 
@@ -186,6 +190,8 @@ void Frame::UpdateField()
 		{
 			ObjectField::getObjectField().player.Damage(1);
 			ite->SetDefeated();
+			PlaySoundMem(ResourceHandles::getResourceHandles().PlayerHitSound, DX_PLAYTYPE_BACK);
+			PlaySoundMem(ResourceHandles::getResourceHandles().EnemyHitSound, DX_PLAYTYPE_BACK);
 		}
 	}
 
@@ -200,6 +206,7 @@ void Frame::UpdateField()
 				ite2->SetDefeated();
 				ite->SetHit(true);
 				_score += DEFEAT_SCORE;
+				PlaySoundMem(ResourceHandles::getResourceHandles().EnemyHitSound, DX_PLAYTYPE_BACK);
 			}
 		}
 	}

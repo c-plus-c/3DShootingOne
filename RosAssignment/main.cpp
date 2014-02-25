@@ -1,9 +1,12 @@
 #include "dxlib.h"
+#include "resource.h"
 #include "Frame.h"
 
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPTSTR, int) {
 	
+	SetWindowIconID(ID_ICON);
+	SetOutApplicationLogValidFlag(FALSE);
 	SetMainWindowText("Endurance UFOz");
 	ChangeWindowMode(TRUE);
 	SetGraphMode(800, 600, 32);
