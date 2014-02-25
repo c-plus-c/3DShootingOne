@@ -28,6 +28,8 @@ class ResourceHandles
 
 		PauseMask = LoadGraph("pause_back.png");
 		GameOverMask = LoadGraph("gameover_mask.png");
+
+		PlaneSideIcon = LoadGraph("plane_side_50.png");
 	}
 public:
 	static ResourceHandles& getResourceHandles()
@@ -56,4 +58,6 @@ public:
 
 	int PauseMask;
 	int GameOverMask;
+
+	int PlaneSideIcon;
 };

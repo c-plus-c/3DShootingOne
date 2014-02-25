@@ -13,7 +13,7 @@ Bullet::Bullet(VECTOR direction, VECTOR translation, int damage, float speed,  B
 	_hit = false;
 	if (_bulletType == BULLET_TYPE_PLAYER_HORMING)
 	{
-		float mdist = 10000000;
+		float mdist = FLT_MAX;
 		auto &field = ObjectField::getObjectField().Enemies;
 
 		for (auto f = field.begin(); f != field.end(); ++f)

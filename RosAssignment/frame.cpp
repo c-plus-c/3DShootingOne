@@ -295,4 +295,7 @@ void Frame::DrawStatus()
 	DrawString(310, 550, (shotlockcount >= SHOT_HANDI) ? "Normal Bullet  :  Ready" : "Normal Bullet  :  Charging...", GetColor(255, 0, 255),1);
 	DrawString(310, 570, (shotlockcount >= HORMINGSHOT_HANDI) ? "Horming Bullet :  Ready" : "Horming Bullet :  Charging...", GetColor(255, 0, 0),1);
 
+	float pitch = ObjectField::getObjectField().player.GetPitch();
+
+	DrawRotaGraph(595, 570, 1, pitch, ResourceHandles::getResourceHandles().PlaneSideIcon, 1);
 }

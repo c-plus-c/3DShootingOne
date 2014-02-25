@@ -272,6 +272,11 @@ bool Player::GetExpired()
 	return PLAYER_STATE_DIE == _playerState;
 }
 
+float Player::GetPitch()
+{
+	return _pitch;
+}
+
 bool Player::Collide(VECTOR translation, float radius)
 {
 	VECTOR sub = VSub(_translation, translation);

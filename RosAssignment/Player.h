@@ -82,5 +82,7 @@ public:
 	int GetShotLockCount();
 	int GetLife();
 
+	float GetPitch();
+
 	void Damage(int damage);
 };
