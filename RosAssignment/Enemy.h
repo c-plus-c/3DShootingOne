@@ -22,8 +22,10 @@ class Enemy :public Object
 	ENEMY_STATE _enemyState;
 	int _count;
 	float _radius;
+	int _shotRate;
+	float _speed;
 public:
-	Enemy(VECTOR direction, VECTOR translation, ENEMY_TYPE enemyType,float radius=3);
+	Enemy(VECTOR direction, VECTOR translation, ENEMY_TYPE enemyType,float radius,float speed,int shotRate);
 	virtual void Update(char input []);
 	virtual void Draw();
 

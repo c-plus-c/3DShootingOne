@@ -1,13 +1,17 @@
 #include "Enemy.h"
 #include "ResorceHandles.h"
+#include "Player.h"
 
-Enemy::Enemy(VECTOR direction, VECTOR translation, ENEMY_TYPE enemyType, float radius)
+Enemy::Enemy(VECTOR direction, VECTOR translation, ENEMY_TYPE enemyType, float radius, float speed, int shotRate)
 :Object(direction, translation)
 {
+	_direction = VNorm(direction);
 	_enemyType = enemyType;
 	_count = 0;
 	_radius = radius;
 	_enemyState = ENEMY_STATE_APPEARANCE;
+	_shotRate = shotRate;
+	_speed = speed;
 }
 
 void Enemy::Update(char input [])
@@ -22,6 +26,12 @@ void Enemy::Update(char input [])
 		}
 		break;
 	case ENEMY_STATE_NORMAL:
+		_translation = VAdd(_translation, VScale(_direction, _speed));
+
+		if ((_translation.x*_translation.x + _translation.z*_translation.z >= ACTIVE_RADIUS*ACTIVE_RADIUS) || _translation.y <= ACTIVE_LOWEST || _translation.y >= ACTIVE_HIGHEST)
+		{
+			_direction = VScale(_direction, -1);
+		}
 		break;
 	case ENEMY_STATE_DYING:
 		if (_count == 39) _enemyState = ENEMY_STATE_DIE;

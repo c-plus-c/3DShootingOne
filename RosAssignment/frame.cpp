@@ -90,7 +90,10 @@ void Frame::AddNewObjects()
 		float y = ACTIVE_LOWEST + (rand() % (ACTIVE_HIGHEST - ACTIVE_LOWEST));
 		float z = r*sin(theta);
 		float size = 10.0 + (rand() % 10);
-		ObjectField::getObjectField().Enemies.push_back(Enemy(VGet(0, 0, 0), VGet(x, y, z), ENEMY_TYPE_EMISSION, size));
+
+
+
+		ObjectField::getObjectField().Enemies.push_back(Enemy(VGet(10, 5, 3), VGet(x, y, z), ENEMY_TYPE_EMISSION, size, 0.4, 300));
 	}
 }
 
