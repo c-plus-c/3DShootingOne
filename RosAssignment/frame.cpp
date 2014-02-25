@@ -160,9 +160,13 @@ void Frame::AddNewObjects()
 		float dy = rand() % 10;
 		float dz = rand() % 10;
 
-		float speed = (1.2*min(10,_level-1)/10)*rand() / 32768.0;
+		float speed = (1.5*min(10, _level - 1) / 10)*(rand() / 32768.0);
 
-		ObjectField::getObjectField().Enemies.push_back(Enemy(VGet(dx, dy, dz), VGet(x, y, z), ENEMY_TYPE_EMISSION, size, speed, 300));
+		int rateraw = max(-20 * _level + 320, 20);
+
+		rateraw = rateraw - 4 * (rand() % 10);
+
+		ObjectField::getObjectField().Enemies.push_back(Enemy(VGet(dx, dy, dz), VGet(x, y, z), ENEMY_TYPE_EMISSION, size, speed, rateraw));
 	}
 }
 
