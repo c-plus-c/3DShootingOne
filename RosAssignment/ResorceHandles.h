@@ -25,6 +25,9 @@ class ResourceHandles
 		BulletIconHandle = LoadGraph("bullet_icon.png");
 
 		TopPicture = LoadGraph("top.png");
+
+		PauseMask = LoadGraph("pause_back.png");
+		GameOverMask = LoadGraph("gameover_mask.png");
 	}
 public:
 	static ResourceHandles& getResourceHandles()
@@ -50,4 +53,7 @@ public:
 	int MagicSquareHandle;
 	int ExplosionHandle[40];
 	int TopPicture;
+
+	int PauseMask;
+	int GameOverMask;
 };

@@ -72,6 +72,7 @@ void Frame::Play()
 
 	if (ObjectField::getObjectField().player.GetExpired())
 	{
+		DrawGraph(0, 0, ResourceHandles::getResourceHandles().GameOverMask, 1);
 		++_waitCount;
 		if (_waitCount >= 90 && buf[KEY_INPUT_Z] == 1)
 		{
@@ -79,8 +80,7 @@ void Frame::Play()
 			_scene = SCENE_TOP;
 		}
 	}
-
-	if (buf[KEY_INPUT_ESCAPE] == 1)
+	else if (buf[KEY_INPUT_ESCAPE] == 1)
 	{
 		_scene = SCENE_PAUSE;
 		_waitCount = 0;
@@ -99,7 +99,10 @@ void Frame::Manual()
 
 void Frame::Pause()
 {
+	SetDrawBright(128, 128, 128);
 	DrawGraph(0, 0, _pausePicture, 0);
+	SetDrawBright(255, 255, 255);
+	DrawGraph(0, 0, ResourceHandles::getResourceHandles().PauseMask, 1);
 
 	++_waitCount;
 	if (_waitCount <= 90) return;
