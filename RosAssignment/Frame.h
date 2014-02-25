@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Status.h"
 enum SCENE
 {
 	SCENE_TOP,
@@ -9,14 +8,18 @@ enum SCENE
 	SCENE_PAUSE
 };
 
+#define ADDITION_CYCLE 60*7
+
 class Frame
 {
 	char buf[256];
+	long _count;
 	SCENE _scene;
 	bool _end;
 
 	void UpdateField();
 	void DrawField();
+	void AddNewObjects();
 
 	void Top();
 	void Play();
@@ -24,6 +27,7 @@ class Frame
 	void Pause();
 
 	void DrawBackground();
+	void DrawRadar();
 
 	Frame();
 public:

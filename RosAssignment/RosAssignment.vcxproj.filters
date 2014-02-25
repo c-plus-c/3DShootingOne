@@ -30,9 +30,6 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Status.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="frame.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>

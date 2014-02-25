@@ -1,6 +1,7 @@
 #include "Frame.h"
 #include <algorithm>
 #include "ObjectField.h"
+#include "Status.h"
 
 Frame& Frame::getFrame()
 {
@@ -12,6 +13,7 @@ Frame::Frame()
 {
 	_scene = SCENE_TOP;
 	_end = false;
+	_count = 0;
 }
 
 void Frame::DrawBackground()
@@ -41,12 +43,14 @@ void Frame::Top()
 
 void Frame::Play()
 {
-	DrawBox(0, 0, 800, 600, GetColor(0, 0, 0), 1);
-
-	DrawBackground();
+	if (_count%ADDITION_CYCLE == 0) AddNewObjects();
 
 	ObjectField::getObjectField().player.Update(buf);
 	UpdateField();
+
+
+	DrawBox(0, 0, 800, 600, GetColor(0, 0, 0), 1);
+	DrawBackground();
 
 	ObjectField::getObjectField().player.Draw();
 	DrawField();
@@ -67,6 +71,24 @@ void Frame::Manual()
 void Frame::Pause()
 {
 
+}
+
+void Frame::AddNewObjects()
+{
+	Status &status = Status::getStatus();
+
+	int enemySum = 15 * exp(-status.Level / 2.5);
+
+	int addSum = enemySum - (int)ObjectField::getObjectField().Enemies.size();
+
+	for (int i = 0; i < addSum; ++i)
+	{
+		float x = -ACTIVE_RADIUS + (rand()%ACTIVE_RADIUS) * 2;
+		float y = ACTIVE_LOWEST + (rand() % (ACTIVE_HIGHEST - ACTIVE_LOWEST));
+		float z = -ACTIVE_RADIUS + (rand() % ACTIVE_RADIUS) * 2;
+		
+		ObjectField::getObjectField().Enemies.push_back(Enemy(VGet(0, 0, 0), VGet(x, y, z), ENEMY_TYPE_EMISSION, 3.0));
+	}
 }
 
 void Frame::UpdateField()
@@ -148,6 +170,28 @@ void Frame::Run()
 	case SCENE_MANUAL:
 		Manual();
 		break;
+	}
+	++_count;
+}
+
+void Frame::DrawRadar()
+{
+	DrawExtendGraph(601, 401, 601 + 184, 401 + 184, ResourceHandles::getResourceHandles().RadarPictureHandle, 1);
+
+	{
+		VECTOR ptrans = ObjectField::getObjectField().player.GetTranslation();
+		VECTOR pdir = ObjectField::getObjectField().player.GetDirection();
+
+		DrawRotaGraph(692 + 92 * (ptrans.x / ACTIVE_RADIUS), 493 - 92 * (ptrans.z / ACTIVE_RADIUS), 0.45, atan2(-pdir.z, pdir.x) + DX_PI / 2, ResourceHandles::getResourceHandles().playerIconHandle, 1);
+		DrawFormatString(692 + 92 * (ptrans.x / ACTIVE_RADIUS) - 25, 493 - 92 * (ptrans.z / ACTIVE_RADIUS) - 25, GetColor(255, 255, 255), "%d", (int) ptrans.y);
+	}
+
+	auto &enemies = ObjectField::getObjectField().Enemies;
+	for (auto ite = enemies.begin(); ite != enemies.end(); ++ite)
+	{
+		VECTOR ptrans = ite->GetTranslation();
+		DrawRotaGraph(692 + 92 * (ptrans.x / ACTIVE_RADIUS), 493 - 92 * (ptrans.z / ACTIVE_RADIUS), 0.45, 0, ResourceHandles::getResourceHandles().playerIconHandle, 1);
+		DrawFormatString(692 + 92 * (ptrans.x / ACTIVE_RADIUS) - 25, 493 - 92 * (ptrans.z / ACTIVE_RADIUS) - 25, GetColor(255, 255, 255), "%d", (int) ptrans.y);
 	}
 }
 

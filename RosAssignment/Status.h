@@ -25,5 +25,3 @@ public:
 		Level = 1;
 	}
 };
-
-void DrawRadar();
