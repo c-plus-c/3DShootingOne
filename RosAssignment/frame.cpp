@@ -1,7 +1,6 @@
 #include "Frame.h"
 #include <algorithm>
 #include "ObjectField.h"
-#include "Status.h"
 
 Frame& Frame::getFrame()
 {
@@ -19,7 +18,7 @@ Frame::Frame()
 void Frame::DrawBackground()
 {
 	SetUseLighting(FALSE);
-	MV1SetScale(ResourceHandles::getResourceHandles().SkyHandle, VGet(500, 500, 500));
+	MV1SetScale(ResourceHandles::getResourceHandles().SkyHandle, VGet(ACTIVE_RADIUS * 5, ACTIVE_HIGHEST, ACTIVE_RADIUS * 5));
 	MV1DrawModel(ResourceHandles::getResourceHandles().SkyHandle);
 
 	SetUseLighting(FALSE);
@@ -32,7 +31,7 @@ void Frame::Top()
 	DrawGraph(0, 0, ResourceHandles::getResourceHandles().TopPicture, 0);
 	if (buf[KEY_INPUT_Z])
 	{
-		ObjectField::getObjectField().player = Player(VGet(10, 100, 0), 0, 0, 0);
+		InitializeGame();
 		_scene = SCENE_PLAY;
 	}
 	else if (buf[KEY_INPUT_ESCAPE])
@@ -44,6 +43,8 @@ void Frame::Top()
 void Frame::Play()
 {
 	if (_count%ADDITION_CYCLE == 0) AddNewObjects();
+
+	_level = _score / DEFEAT_SCORE + 1;
 
 	ObjectField::getObjectField().player.Update(buf);
 	UpdateField();
@@ -75,19 +76,20 @@ void Frame::Pause()
 
 void Frame::AddNewObjects()
 {
-	Status &status = Status::getStatus();
 
-	int enemySum = 15 * exp(-status.Level / 2.5);
+	int enemySum = 15 * (1 - 1 / exp(_level / 2.5));
 
 	int addSum = enemySum - (int)ObjectField::getObjectField().Enemies.size();
 
 	for (int i = 0; i < addSum; ++i)
 	{
-		float x = -ACTIVE_RADIUS + (rand()%ACTIVE_RADIUS) * 2;
+		float r = rand() % ACTIVE_RADIUS;
+		float theta = (rand() % 360)*DX_PI / 180.0;
+		float x = r*cos(theta);
 		float y = ACTIVE_LOWEST + (rand() % (ACTIVE_HIGHEST - ACTIVE_LOWEST));
-		float z = -ACTIVE_RADIUS + (rand() % ACTIVE_RADIUS) * 2;
-		
-		ObjectField::getObjectField().Enemies.push_back(Enemy(VGet(0, 0, 0), VGet(x, y, z), ENEMY_TYPE_EMISSION, 3.0));
+		float z = r*sin(theta);
+		float size = 10.0 + (rand() % 10);
+		ObjectField::getObjectField().Enemies.push_back(Enemy(VGet(0, 0, 0), VGet(x, y, z), ENEMY_TYPE_EMISSION, size));
 	}
 }
 
@@ -127,6 +129,7 @@ void Frame::UpdateField()
 			{
 				ite2->SetDefeated();
 				ite->SetHit(true);
+				_score += DEFEAT_SCORE;
 			}
 		}
 	}
@@ -193,6 +196,15 @@ void Frame::DrawRadar()
 		DrawRotaGraph(692 + 92 * (ptrans.x / ACTIVE_RADIUS), 493 - 92 * (ptrans.z / ACTIVE_RADIUS), 0.45, 0, ResourceHandles::getResourceHandles().playerIconHandle, 1);
 		DrawFormatString(692 + 92 * (ptrans.x / ACTIVE_RADIUS) - 25, 493 - 92 * (ptrans.z / ACTIVE_RADIUS) - 25, GetColor(255, 255, 255), "%d", (int) ptrans.y);
 	}
+}
+
+void Frame::InitializeGame()
+{
+	_count = 0;
+	_score = 0;
+	_level = 1;
+
+	ObjectField::getObjectField().player = Player(VGet(10, 100, 0), 0, 0, 0);
 }
 
 bool Frame::End()

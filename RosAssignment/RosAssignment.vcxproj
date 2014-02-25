@@ -97,7 +97,6 @@
     <ClInclude Include="ObjectField.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ResorceHandles.h" />
-    <ClInclude Include="Status.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

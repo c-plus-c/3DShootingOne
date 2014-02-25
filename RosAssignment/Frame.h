@@ -10,12 +10,18 @@ enum SCENE
 
 #define ADDITION_CYCLE 60*7
 
+#define DEFEAT_SCORE 100
+#define LEVELUP 500
+
 class Frame
 {
 	char buf[256];
 	long _count;
 	SCENE _scene;
 	bool _end;
+
+	int _score;
+	int _level;
 
 	void UpdateField();
 	void DrawField();
@@ -34,4 +40,5 @@ public:
 	static Frame& getFrame();
 	void Run();
 	bool End();
+	void InitializeGame();
 };
