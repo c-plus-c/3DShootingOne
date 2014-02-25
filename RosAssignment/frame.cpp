@@ -30,6 +30,9 @@ void Frame::DrawBackground()
 void Frame::Top()
 {
 	DrawGraph(0, 0, ResourceHandles::getResourceHandles().TopPicture, 0);
+
+	++_waitCount;
+	if (_waitCount <= 90) return;
 	if (buf[KEY_INPUT_Z])
 	{
 		InitializeGame();
@@ -66,6 +69,17 @@ void Frame::Play()
 	field.Enemies.erase(remove_if(field.Enemies.begin(), field.Enemies.end(), Enemy_Erase), field.Enemies.end());
 
 	++_count;
+
+	if (ObjectField::getObjectField().player.GetExpired())
+	{
+		++_waitCount;
+		if (_waitCount >= 90 && buf[KEY_INPUT_Z] == 1)
+		{
+			_waitCount = 0;
+			_scene = SCENE_TOP;
+		}
+	}
+
 	if (buf[KEY_INPUT_ESCAPE] == 1)
 	{
 		_scene = SCENE_PAUSE;

@@ -136,12 +136,16 @@ void Player::Update(char input[])
 	float ty, tz;
 	float nx, ny, nz;
 
+	if (_playerState == PLAYER_STATE_DIE)
+	{
+		return;
+	}
 
 	if (_sideOut == 1)
 	{
 		_autoMove();
 	}
-	else
+	else if (_playerState==PLAYER_STATE_NORMAL)
 	{
 		_manualMove(input);
 	}
@@ -220,28 +224,52 @@ void Player::Update(char input[])
 		}
 	}
 
+	if (_playerState == PLAYER_STATE_DYING&&_count==40)
+	{
+		_playerState = PLAYER_STATE_DIE;
+		_count = 0;
+	}
+
 }
 
 
 void Player::Draw()
 {
-	if (_playerState != PLAYER_STATE_NORMAL && _count % 2 == 0) return;
 
 	SetUseLighting(FALSE);
 	MATRIX matrix;
-	matrix = MGetRotAxis(VGet(1, 0, 0), _pitch);
-	matrix = MMult(matrix, MGetRotAxis(VGet(0, 1, 0), _yaw));
-	matrix = MMult(matrix, MGetRotAxis(_direction, _roll));
-	matrix = MMult(matrix, MGetTranslate(_translation));
+	switch (_playerState)
+	{
+	case PLAYER_STATE_NORMAL:
+		matrix = MGetRotAxis(VGet(1, 0, 0), _pitch);
+		matrix = MMult(matrix, MGetRotAxis(VGet(0, 1, 0), _yaw));
+		matrix = MMult(matrix, MGetRotAxis(_direction, _roll));
+		matrix = MMult(matrix, MGetTranslate(_translation));
 
-	MV1SetMatrix(ResourceHandles::getResourceHandles().PlayerHandle, matrix);
+		MV1SetMatrix(ResourceHandles::getResourceHandles().PlayerHandle, matrix);
 
-	MV1DrawModel(ResourceHandles::getResourceHandles().PlayerHandle);
+		MV1DrawModel(ResourceHandles::getResourceHandles().PlayerHandle);
+		break;
+	case PLAYER_STATE_INCIVIBLE:
+		if (_count % 2 == 0) break;
+		matrix = MGetRotAxis(VGet(1, 0, 0), _pitch);
+		matrix = MMult(matrix, MGetRotAxis(VGet(0, 1, 0), _yaw));
+		matrix = MMult(matrix, MGetRotAxis(_direction, _roll));
+		matrix = MMult(matrix, MGetTranslate(_translation));
+
+		MV1SetMatrix(ResourceHandles::getResourceHandles().PlayerHandle, matrix);
+
+		MV1DrawModel(ResourceHandles::getResourceHandles().PlayerHandle);
+		break;
+	case PLAYER_STATE_DYING:
+		DrawBillboard3D(_translation, 0.5f, 0.5f, 3, 0, ResourceHandles::getResourceHandles().ExplosionHandle[_count], TRUE);
+		break;
+	}
 }
 
 bool Player::GetExpired()
 {
-	return false;
+	return PLAYER_STATE_DIE == _playerState;
 }
 
 bool Player::Collide(VECTOR translation, float radius)
@@ -256,7 +284,15 @@ void Player::Damage(int damage)
 	if (_playerState == PLAYER_STATE_NORMAL)
 	{
 		_life -= damage;
-		_playerState = PLAYER_STATE_INCIVIBLE;
+		if (_life == 0)
+		{
+			_playerState = PLAYER_STATE_DYING;
+			_count = 0;
+		}
+		else
+		{
+			_playerState = PLAYER_STATE_INCIVIBLE;
+		}
 	}
 }
 
