@@ -84,5 +84,7 @@ public:
 
 	float GetPitch();
 
+	bool GetSideOut();
+
 	void Damage(int damage);
 };

@@ -298,4 +298,9 @@ void Frame::DrawStatus()
 	float pitch = ObjectField::getObjectField().player.GetPitch();
 
 	DrawRotaGraph(595, 570, 1, pitch, ResourceHandles::getResourceHandles().PlaneSideIcon, 1);
+
+	if (ObjectField::getObjectField().player.GetSideOut())
+	{
+		DrawGraph(300, 10, ResourceHandles::getResourceHandles().AutoPilotNoticeHandle, 0);
+	}
 }

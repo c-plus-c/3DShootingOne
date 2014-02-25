@@ -310,3 +310,8 @@ int Player::GetLife()
 {
 	return _life;
 }
+
+bool Player::GetSideOut()
+{
+	return _sideOut == 1;
+}
