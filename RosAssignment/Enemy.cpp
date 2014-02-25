@@ -76,6 +76,11 @@ float Enemy::GetRadius()
 	return _radius;
 }
 
+ENEMY_STATE Enemy::GetState()
+{
+	return _enemyState;
+}
+
 bool Enemy_Erase(Enemy enemy)
 {
 	return enemy.GetExpired();

@@ -88,7 +88,7 @@ void Frame::UpdateField()
 	{
 		ite->Update(NULL);
 
-		if (ObjectField::getObjectField().player.Collide(ite->GetTranslation(), ite->GetRadius()*0.5))
+		if (ite->GetState() == ENEMY_STATE_NORMAL&& ObjectField::getObjectField().player.Collide(ite->GetTranslation(), ite->GetRadius()*0.5))
 		{
 			ObjectField::getObjectField().player.Damage(1);
 			ite->SetDefeated();

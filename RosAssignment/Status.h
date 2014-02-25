@@ -22,7 +22,7 @@ public:
 	{
 		Score = 0;
 		Count = 0;
-		Level = 0;
+		Level = 1;
 	}
 };
 
