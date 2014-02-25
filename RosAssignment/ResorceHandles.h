@@ -33,7 +33,7 @@ class ResourceHandles
 
 		AutoPilotNoticeHandle = LoadGraph("resource/autopilotnotice.jpg");
 
-		ManualPicture = LoadGraph("resource/manual.png");
+		ManualPicture = LoadGraph("resource/manual.jpg");
 
 		PlayerHitSound = LoadSoundMem("resource/playerhit.ogg");
 		EnemyHitSound = LoadSoundMem("resource/enemyhit.ogg");

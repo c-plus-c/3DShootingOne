@@ -16,14 +16,14 @@ Bullet::Bullet(VECTOR direction, VECTOR translation, int damage, float speed,  B
 		float mdist = FLT_MAX;
 		auto &field = ObjectField::getObjectField().Enemies;
 
-		for (auto f = field.begin(); f != field.end(); ++f)
+		for (int i = 0; i<(int)field.size();++i)
 		{
-			VECTOR v = VSub(_translation, f->GetTranslation());
+			VECTOR v = VSub(_translation, field[i].GetTranslation());
 			float dist = VDot(v, v);
 			if (mdist > dist)
 			{
 				mdist = dist;
-				_targetEnemy = &(*f);
+				_targetEnemy = &field[i];
 			}
 		}
 	}
