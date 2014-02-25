@@ -1,3 +1,5 @@
+#include "Status.h"
+
 #include "ObjectField.h"
 #include "ResorceHandles.h"
 #include "Player.h"

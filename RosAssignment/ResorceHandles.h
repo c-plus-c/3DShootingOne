@@ -21,6 +21,8 @@ class ResourceHandles
 
 		MagicSquareHandle = LoadGraph("magic_square.png");
 		LoadDivGraph("exp.png", 40, 4, 10, 301, 247, ExplosionHandle);
+
+		TopPicture = LoadGraph("top.png");
 	}
 public:
 	static ResourceHandles& getResourceHandles()
@@ -44,4 +46,5 @@ public:
 
 	int MagicSquareHandle;
 	int ExplosionHandle[40];
+	int TopPicture;
 };

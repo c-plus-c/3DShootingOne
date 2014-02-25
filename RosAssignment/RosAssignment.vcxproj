@@ -83,8 +83,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="DrawBackground.cpp" />
-    <ClCompile Include="DrawStatus.cpp" />
+    <ClCompile Include="frame.cpp" />
+    <ClCompile Include="Status.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -93,10 +93,12 @@
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Frame.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectField.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ResorceHandles.h" />
+    <ClInclude Include="Status.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

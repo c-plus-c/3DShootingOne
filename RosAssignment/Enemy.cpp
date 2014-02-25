@@ -19,7 +19,6 @@ void Enemy::Update(char input [])
 		if (_count == 45)
 		{
 			_enemyState = ENEMY_STATE_NORMAL;
-			_count == -1;
 		}
 		break;
 	case ENEMY_STATE_NORMAL:
