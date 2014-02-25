@@ -22,6 +22,9 @@ class Frame
 
 	int _score;
 	int _level;
+	int _waitCount;
+
+	int _pausePicture;
 
 	void UpdateField();
 	void DrawField();

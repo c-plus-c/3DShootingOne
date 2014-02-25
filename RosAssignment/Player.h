@@ -32,8 +32,10 @@
 #define ACTIVE_LOWEST 40
 #define ACTIVE_RADIUS 300
 
-#define SHOT_HANDI 180
+#define SHOT_HANDI 150
+#define HORMINGSHOT_HANDI (SHOT_HANDI*3)
 #define INCIVIBLE_TERM 150
+#define FIRST_LIFE 10
 
 enum PLAYER_STATE
 {
@@ -75,6 +77,9 @@ public:
 	virtual void Draw();
 	virtual bool GetExpired();
 	virtual bool Collide(VECTOR translation, float radius);
+
+	int GetShotLockCount();
+	int GetLife();
 
 	void Damage(int damage);
 };

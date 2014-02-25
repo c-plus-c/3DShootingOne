@@ -21,6 +21,8 @@ Player::Player(VECTOR translation, float pitch, float roll, float yaw)
 	_playerState = PLAYER_STATE_NORMAL;
 
 	SetCameraNearFar(0.1, 10000);
+
+	_life = FIRST_LIFE;
 }
 
 void Player::_manualMove(char buf [])
@@ -256,4 +258,14 @@ void Player::Damage(int damage)
 		_life -= damage;
 		_playerState = PLAYER_STATE_INCIVIBLE;
 	}
+}
+
+int Player::GetShotLockCount()
+{
+	return _shotLockCount;
+}
+
+int Player::GetLife()
+{
+	return _life;
 }

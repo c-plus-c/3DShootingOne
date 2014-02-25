@@ -1,112 +1,101 @@
 0:システムの情報を出力します
-2:	ＤＸライブラリ Ver3.11d
-4:	論理プロセッサの数 : 8
-5:	ＯＳ  Windows8 ( Build 9200  )
-108:	ＣＰＵ動作速度：大体3.36GHz
-110:	ＭＭＸ命令を使用します
-112:	ＳＳＥ命令が使用可能です
-113:	ＳＳＥ２命令が使用可能です
-115:	ＣＰＵベンダ：GenuineIntel
-124:	ＣＰＵ名：        Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
-127:ＣＯＭの初期化... 成功しました
-134:メモリ総量:32714.03MB  空きメモリ領域:23074.70MB 
-136:タイマーの精度を検査します
-137:精度結果 更新回数 マルチメディアタイマー：0  パフォーマンスカウンター：60
-139: パフォーマンスカウンターを使用します タイマー精度 : 3312.789000 KHz 
-143: ソフトの二重起動検査... 二重起動はされていませんでした
-148:ウインドウクラスを登録します... 登録に成功しました
-152:ウインドウモード起動用のウインドウを作成します
-158:ウインドウの作成に成功しました
-160:ウインドウを表示します
-169:ＩＭＥを無効にしました
-171:ウインドウスタイルをウインドウモード用に変更します... 完了
-195:DirectInput関係初期化処理
-197:	XInput DLL の読み込み中... 成功
-202:	DirectInput7 の取得中... 成功
-218:		引き続き初期化処理... 初期化成功
-223:	ジョイパッドの初期化... 
-227:	ジョイパッドの初期化は正常に終了しました
-229:	マウスデバイスの初期化... 初期化成功
-233:	キーボードデバイスの初期化... 初期化成功
-237:DirectInput 関連の初期化は正常に終了しました
-240:XAudio2 の初期化を行います
-244:	XAudio2_8.dll を使用します
-246:	XAudio2 インターフェースの取得と初期化を行います....  成功 Ver2.8
-272:XAudio2 の初期化は正常に終了しました
-277:DirectDraw オブジェクトの取得を行います....  成功
-284:引き続き初期化処理... 初期化に成功しました
-320:IDirect3D9 オブジェクトを取得します.... 成功
-326:IDirect3DDevice9 オブジェクトを取得します.... ハードウエア頂点演算を使用します
-599:成功
-601:Driver:nvd3dum.dll  Description:NVIDIA GeForce GTX 660 Ti
-603:画面のフォーマットは D3DFMT_X8R8G8B8 です
-606:16bit Zバッファフォーマットは D3DFMT_D16 です
-608:24bit Zバッファフォーマットは D3DFMT_D24X8 です
-609:32bit Zバッファフォーマットは D3DFMT_D24X8 です
-611:16bit カラーフォーマットは D3DFMT_R5G6B5 です
-613:32bit カラーフォーマットは D3DFMT_X8R8G8B8 です
-615:アルファ付き 16bit カラーフォーマットは D3DFMT_A4R4G4B4 です
-617:アルファ付き 32bit カラーフォーマットは D3DFMT_A8R8G8B8 です
-619:アルファテスト用 16bit カラーフォーマットは D3DFMT_A1R5G5B5 です
-621:アルファテスト用 32bit カラーフォーマットは D3DFMT_A8R8G8B8 です
-623:ＤＸＴ１テクスチャフォーマットはD3DFMT_DXT1 です
-625:ＤＸＴ２テクスチャフォーマットはD3DFMT_DXT2 です
-627:ＤＸＴ３テクスチャフォーマットはD3DFMT_DXT3 です
-629:ＤＸＴ４テクスチャフォーマットはD3DFMT_DXT4 です
-631:ＤＸＴ５テクスチャフォーマットはD3DFMT_DXT5 です
-633:描画用 16bit カラーフォーマットは D3DFMT_R5G5B5 です
-635:描画用 32bit カラーフォーマットは D3DFMT_X8R8G8B8 です
-637:描画用アルファ付き 32bit カラーフォーマットは D3DFMT_A8R8G8B8 です
-639:描画用ABGR整数16ビット型カラーフォーマットは D3DFMT_A16B16G16R16 です
-641:描画用ABGR浮動小数点16ビット型カラーフォーマットは D3DFMT_A16B16G16R16F です
-643:描画用ABGR浮動小数点32ビット型カラーフォーマットは D3DFMT_A32B32G32R32F です
-644:描画用１チャンネル整数8ビット型カラーフォーマットは D3DFMT_L8 です
-646:描画用１チャンネル整数16ビット型カラーフォーマットは D3DFMT_L16 です
-648:描画用１チャンネル浮動小数点16ビット型カラーフォーマットは D3DFMT_R16F です
-651:描画用１チャンネル浮動小数点32ビット型カラーフォーマットは D3DFMT_R32F です
-653:描画用２チャンネル整数8ビット型カラーフォーマットは D3DFMT_A8B8G8R8 です
-655:描画用２チャンネル整数16ビット型カラーフォーマットは D3DFMT_G16R16 です
-658:描画用２チャンネル浮動小数点16ビット型カラーフォーマットは D3DFMT_G16R16F です
-660:描画用２チャンネル浮動小数点32ビット型カラーフォーマットは D3DFMT_G32R32F です
-662:一度に描画できるプリミティブの最大数:16777215
-664:対応している最大頂点インデックス:16777215
-666:同時にレンダリングできるバッファの数:4
-668:最大テクスチャサイズ　幅:16384 高さ:16384
-670:テクスチャステージテンポラリレジスタ：使用可
-673:減算合成のハードウェア対応：ネイティブ
-676:ハードウェア頂点シェーダーバージョンコード：300
-678:エミュレーション頂点シェーダーバージョンコード：エミュレーション無し
-680:ピクセルシェーダーバージョンコード：300
-687:バックバッファロック転送の時間:82nsec  一時的な描画可能バッファを使用した転送の時間:527nsec
-689:バックバッファロックを使用します
-692:Ｚバッファを作成します.... 成功
-979:プログラマブルシェーダーを使用します
+1:	ＤＸライブラリ Ver3.11d
+2:	論理プロセッサの数 : 8
+3:	ＯＳ  Windows8 ( Build 9200  )
+107:	ＣＰＵ動作速度：大体3.38GHz
+109:	ＭＭＸ命令を使用します
+110:	ＳＳＥ命令が使用可能です
+111:	ＳＳＥ２命令が使用可能です
+113:	ＣＰＵベンダ：GenuineIntel
+119:	ＣＰＵ名：        Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
+120:ＣＯＭの初期化... 成功しました
+127:メモリ総量:32714.03MB  空きメモリ領域:23814.13MB 
+128:タイマーの精度を検査します
+129:精度結果 更新回数 マルチメディアタイマー：0  パフォーマンスカウンター：60
+131: パフォーマンスカウンターを使用します タイマー精度 : 3312.789000 KHz 
+134: ソフトの二重起動検査... 二重起動はされていませんでした
+139:ウインドウクラスを登録します... 登録に成功しました
+141:ウインドウモード起動用のウインドウを作成します
+146:ウインドウの作成に成功しました
+147:ウインドウを表示します
+153:ＩＭＥを無効にしました
+156:ウインドウスタイルをウインドウモード用に変更します... 完了
+179:DirectInput関係初期化処理
+181:	XInput DLL の読み込み中... 成功
+184:	DirectInput7 の取得中... 成功
+202:		引き続き初期化処理... 初期化成功
+205:	ジョイパッドの初期化... 
+209:	ジョイパッドの初期化は正常に終了しました
+211:	マウスデバイスの初期化... 初期化成功
+215:	キーボードデバイスの初期化... 初期化成功
+219:DirectInput 関連の初期化は正常に終了しました
+221:XAudio2 の初期化を行います
+224:	XAudio2_8.dll を使用します
+226:	XAudio2 インターフェースの取得と初期化を行います....  成功 Ver2.8
+249:XAudio2 の初期化は正常に終了しました
+254:DirectDraw オブジェクトの取得を行います....  成功
+260:引き続き初期化処理... 初期化に成功しました
+293:IDirect3D9 オブジェクトを取得します.... 成功
+296:IDirect3DDevice9 オブジェクトを取得します.... ハードウエア頂点演算を使用します
+563:成功
+566:Driver:nvd3dum.dll  Description:NVIDIA GeForce GTX 660 Ti
+568:画面のフォーマットは D3DFMT_X8R8G8B8 です
+569:16bit Zバッファフォーマットは D3DFMT_D16 です
+570:24bit Zバッファフォーマットは D3DFMT_D24X8 です
+572:32bit Zバッファフォーマットは D3DFMT_D24X8 です
+573:16bit カラーフォーマットは D3DFMT_R5G6B5 です
+575:32bit カラーフォーマットは D3DFMT_X8R8G8B8 です
+576:アルファ付き 16bit カラーフォーマットは D3DFMT_A4R4G4B4 です
+578:アルファ付き 32bit カラーフォーマットは D3DFMT_A8R8G8B8 です
+579:アルファテスト用 16bit カラーフォーマットは D3DFMT_A1R5G5B5 です
+580:アルファテスト用 32bit カラーフォーマットは D3DFMT_A8R8G8B8 です
+582:ＤＸＴ１テクスチャフォーマットはD3DFMT_DXT1 です
+584:ＤＸＴ２テクスチャフォーマットはD3DFMT_DXT2 です
+585:ＤＸＴ３テクスチャフォーマットはD3DFMT_DXT3 です
+587:ＤＸＴ４テクスチャフォーマットはD3DFMT_DXT4 です
+588:ＤＸＴ５テクスチャフォーマットはD3DFMT_DXT5 です
+590:描画用 16bit カラーフォーマットは D3DFMT_R5G5B5 です
+592:描画用 32bit カラーフォーマットは D3DFMT_X8R8G8B8 です
+593:描画用アルファ付き 32bit カラーフォーマットは D3DFMT_A8R8G8B8 です
+594:描画用ABGR整数16ビット型カラーフォーマットは D3DFMT_A16B16G16R16 です
+596:描画用ABGR浮動小数点16ビット型カラーフォーマットは D3DFMT_A16B16G16R16F です
+598:描画用ABGR浮動小数点32ビット型カラーフォーマットは D3DFMT_A32B32G32R32F です
+599:描画用１チャンネル整数8ビット型カラーフォーマットは D3DFMT_L8 です
+600:描画用１チャンネル整数16ビット型カラーフォーマットは D3DFMT_L16 です
+602:描画用１チャンネル浮動小数点16ビット型カラーフォーマットは D3DFMT_R16F です
+603:描画用１チャンネル浮動小数点32ビット型カラーフォーマットは D3DFMT_R32F です
+605:描画用２チャンネル整数8ビット型カラーフォーマットは D3DFMT_A8B8G8R8 です
+607:描画用２チャンネル整数16ビット型カラーフォーマットは D3DFMT_G16R16 です
+608:描画用２チャンネル浮動小数点16ビット型カラーフォーマットは D3DFMT_G16R16F です
+610:描画用２チャンネル浮動小数点32ビット型カラーフォーマットは D3DFMT_G32R32F です
+611:一度に描画できるプリミティブの最大数:16777215
+612:対応している最大頂点インデックス:16777215
+614:同時にレンダリングできるバッファの数:4
+615:最大テクスチャサイズ　幅:16384 高さ:16384
+617:テクスチャステージテンポラリレジスタ：使用可
+619:減算合成のハードウェア対応：ネイティブ
+620:ハードウェア頂点シェーダーバージョンコード：300
+622:エミュレーション頂点シェーダーバージョンコード：エミュレーション無し
+624:ピクセルシェーダーバージョンコード：300
+629:バックバッファロック転送の時間:65nsec  一時的な描画可能バッファを使用した転送の時間:452nsec
+632:バックバッファロックを使用します
+633:Ｚバッファを作成します.... 成功
+846:プログラマブルシェーダーを使用します
 
-1037:フォントの初期化を行います
-1041:フォントの初期化は正常に終了しました
-1057:文字コードバッファの初期化を行います... 完了しました
-1066:モデルファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\plane3.x が読み込めませんでした
-1068:モデルファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\sky.x が読み込めませんでした
-1071:モデルファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\bottomcloud.x が読み込めませんでした
-1074:モデルファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\playerBullet.x が読み込めませんでした
-1076:モデルファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\enemyBullet.x が読み込めませんでした
-1079:モデルファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\hormingBullet.x が読み込めませんでした
-1082:モデルファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\ufo.x が読み込めませんでした
-1086:画像ファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\radar.png がありません
-1088:画像ファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\red_icon.png がありません
-1091:画像ファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\red_icon.png がありません
-1095:画像ファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\magic_square.png がありません
-1098:画像ファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\exp.png のロードに失敗しました
-1102:画像ファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\top.png がありません
-3518:ウインドウを閉じようとしています
-3522:ウインドウが破棄されようとしています
-3525:ソフトを終了する準備が整いました
-3530:フォントの初期化を行います
-3532:フォントの初期化は正常に終了しました
-3538:Direct3DDevice9 の解放 2
-3560:Direct3D9 DLL の解放 1
-3566:DirectInput 関連の終了処理... 完了
-3665:
-3667:Alloc memory dump
-3669:	Total size:0(0.000kb)  Alloc num:0
-3670:
+893:フォントの初期化を行います
+896:フォントの初期化は正常に終了しました
+908:文字コードバッファの初期化を行います... 完了しました
+937:モデルファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\plane3.x が読み込めませんでした
+939:モデルファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\sky.x が読み込めませんでした
+942:モデルファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\bottomcloud.x が読み込めませんでした
+944:モデルファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\playerBullet.x が読み込めませんでした
+946:モデルファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\enemyBullet.x が読み込めませんでした
+948:モデルファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\hormingBullet.x が読み込めませんでした
+950:モデルファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\ufo.x が読み込めませんでした
+953:画像ファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\radar.png がありません
+955:画像ファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\red_icon.png がありません
+957:画像ファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\ufo_icon.png がありません
+960:画像ファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\magic_square.png がありません
+963:画像ファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\exp.png のロードに失敗しました
+965:画像ファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\bullet_icon.png がありません
+967:画像ファイル c:\Users\cplusc\documents\visual studio 2013\Projects\RosAssignment\RosAssignment\top.png がありません

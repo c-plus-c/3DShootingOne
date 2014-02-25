@@ -13,6 +13,7 @@ Frame::Frame()
 	_scene = SCENE_TOP;
 	_end = false;
 	_count = 0;
+	_waitCount = 0;
 }
 
 void Frame::DrawBackground()
@@ -63,16 +64,48 @@ void Frame::Play()
 	field.EnemyBullet.erase(remove_if(field.EnemyBullet.begin(), field.EnemyBullet.end(), Bullet_Erase), field.EnemyBullet.end());
 	field.PlayerBullet.erase(remove_if(field.PlayerBullet.begin(), field.PlayerBullet.end(), Bullet_Erase), field.PlayerBullet.end());
 	field.Enemies.erase(remove_if(field.Enemies.begin(), field.Enemies.end(), Enemy_Erase), field.Enemies.end());
+
+	++_count;
+	if (buf[KEY_INPUT_ESCAPE] == 1)
+	{
+		_scene = SCENE_PAUSE;
+		_waitCount = 0;
+
+		_pausePicture = MakeGraph(800, 600);
+		// âÊñ ÉfÅ[É^ÇÃéÊÇËÇ±Ç›
+		GetDrawScreenGraph(0, 0, 800, 600, _pausePicture);
+	}
 }
 
 void Frame::Manual()
 {
 
+	++_waitCount;
 }
 
 void Frame::Pause()
 {
+	DrawGraph(0, 0, _pausePicture, 0);
 
+	++_waitCount;
+	if (_waitCount <= 90) return;
+
+	if (buf[KEY_INPUT_Q] == 1)
+	{
+		_scene = SCENE_TOP;
+		_waitCount = 0;
+	}
+	else if (buf[KEY_INPUT_C] == 1)
+	{
+		_waitCount = 0;
+		_scene = SCENE_PLAY;
+	}
+	else if (buf[KEY_INPUT_R] == 1)
+	{
+		_waitCount = 0;
+		InitializeGame();
+		_scene = SCENE_PLAY;
+	}
 }
 
 void Frame::AddNewObjects()
@@ -182,7 +215,6 @@ void Frame::Run()
 		Manual();
 		break;
 	}
-	++_count;
 }
 
 void Frame::DrawRadar()
@@ -220,6 +252,10 @@ void Frame::InitializeGame()
 	_score = 0;
 	_level = 1;
 
+	ObjectField::getObjectField().Enemies.clear();
+	ObjectField::getObjectField().EnemyBullet.clear();
+	ObjectField::getObjectField().PlayerBullet.clear();
+
 	ObjectField::getObjectField().player = Player(VGet(10, 100, 0), 0, 0, 0);
 }
 
@@ -230,6 +266,16 @@ bool Frame::End()
 
 void Frame::DrawStatus()
 {
-	DrawFormatString(10, 10, GetColor(255, 255, 255), "Level : %d", _level);
-	DrawFormatString(100, 10, GetColor(255, 255, 255), "Score : %d", _score);
+	DrawFormatString(10, 10, GetColor(255, 255, 255), "Life : %d/%d", ObjectField::getObjectField().player.GetLife(),FIRST_LIFE);
+	DrawFormatString(150, 10, GetColor(255, 255, 255), "Level : %d", _level);
+	DrawFormatString(650, 10, GetColor(255, 255, 255), "Score : %08d", _score);
+
+	DrawBox(10, 550, 10 + (290 * (float) SHOT_HANDI / (float) HORMINGSHOT_HANDI), 590, GetColor(255, 0, 255), 0);
+	DrawBox(10, 550, 300, 590, GetColor(255, 255, 255), 0);
+	float shotlockcount = (float) ObjectField::getObjectField().player.GetShotLockCount();
+	DrawBox(10, 550, 10 + (290 * min(1, shotlockcount / (float) HORMINGSHOT_HANDI)), 590, (shotlockcount >= HORMINGSHOT_HANDI) ? GetColor(255, 0, 0) : (shotlockcount >= SHOT_HANDI) ? GetColor(255, 0, 255) : GetColor(255, 255, 255), 1);
+
+	DrawString(310, 550, (shotlockcount >= SHOT_HANDI) ? "Normal Bullet  :  Ready" : "Normal Bullet  :  Charging...", GetColor(255, 0, 255),1);
+	DrawString(310, 570, (shotlockcount >= HORMINGSHOT_HANDI) ? "Horming Bullet :  Ready" : "Horming Bullet :  Charging...", GetColor(255, 0, 0),1);
+
 }
