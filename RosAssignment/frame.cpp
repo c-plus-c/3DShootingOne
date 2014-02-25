@@ -33,6 +33,10 @@ void Frame::Top()
 		ObjectField::getObjectField().player = Player(VGet(10, 100, 0), 0, 0, 0);
 		_scene = SCENE_PLAY;
 	}
+	else if (buf[KEY_INPUT_ESCAPE])
+	{
+		_end = true;
+	}
 }
 
 void Frame::Play()
