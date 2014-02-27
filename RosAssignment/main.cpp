@@ -19,6 +19,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPTSTR, int) {
 	ChangeLightTypePoint(VGet(0, 100, 0), 10000, 1, 0, 0);
 	SetLightAmbColor(GetColorF(1.0f, 1.0f, 1.0f, 0.0f));
 
+	SetCameraNearFar(0.1, 10000);
 	Frame &frame = Frame::getFrame();
 
 	while (ProcessMessage() == 0&&!frame.End())
