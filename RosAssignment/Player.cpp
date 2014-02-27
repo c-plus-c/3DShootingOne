@@ -27,7 +27,7 @@ Player::Player(VECTOR translation, float pitch, float roll, float yaw)
 
 void Player::_manualMove(char buf [])
 {
-	if (buf[KEY_INPUT_RIGHT] == 1){ //¶‚Éù‰ñ
+	if (buf[KEY_INPUT_RIGHT] == 1){ //‰E‚Éù‰ñ
 		if (_rollAccelerator>0) _rollAccelerator = 0;
 		_rollAccelerator -= ROLLACCELBAND;
 		if (_rollAccelerator<-ROLLACCELBANDLIMIT) _rollAccelerator = -ROLLACCELBANDLIMIT;
@@ -38,7 +38,7 @@ void Player::_manualMove(char buf [])
 		}
 		_yaw -= _roll*YAWTIME;
 	}
-	else if (buf[KEY_INPUT_LEFT] == 1){ //‰E‚Éù‰ñ
+	else if (buf[KEY_INPUT_LEFT] == 1){ //¶‚Éù‰ñ
 
 		if (_rollAccelerator<0) _rollAccelerator = 0;
 		_rollAccelerator += ROLLACCELBAND;
@@ -79,7 +79,7 @@ void Player::_manualMove(char buf [])
 		_yaw -= _roll*YAWTIME;
 	}
 
-	if (buf[KEY_INPUT_UP] == 1){ //ã¸
+	if (buf[KEY_INPUT_UP] == 1){ //‰º~
 		if (_pitchAccelerator>0) _pitchAccelerator = 0;
 		_pitchAccelerator -= PITCHACCELBAND;
 		if (_pitchAccelerator<-PITCHACCELBANDLIMIT) _pitchAccelerator = -PITCHACCELBANDLIMIT;
@@ -89,7 +89,7 @@ void Player::_manualMove(char buf [])
 			_pitch += 2 * DX_PI;
 		}
 	}
-	else if (buf[KEY_INPUT_DOWN] == 1){ //‰º~
+	else if (buf[KEY_INPUT_DOWN] == 1){ //ã¸
 		if (_pitchAccelerator<0) _pitchAccelerator = 0;
 		_pitchAccelerator += PITCHACCELBAND;
 		if (_pitchAccelerator>PITCHACCELBANDLIMIT) _pitchAccelerator = PITCHACCELBANDLIMIT;
@@ -237,7 +237,6 @@ void Player::Update(char input[])
 
 void Player::Draw()
 {
-
 	SetUseLighting(FALSE);
 	MATRIX matrix;
 	switch (_playerState)
