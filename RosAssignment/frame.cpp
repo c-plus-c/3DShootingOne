@@ -326,4 +326,6 @@ void Frame::DrawStatus()
 	{
 		DrawGraph(300, 10, ResourceHandles::getResourceHandles().AutoPilotNoticeHandle, 0);
 	}
+
+	DrawString(10, 530, "ESC : É|Å[ÉY", GetColor(255, 255, 255));
 }
