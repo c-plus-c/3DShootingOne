@@ -24,6 +24,7 @@ class Enemy :public Object
 	float _radius;
 	int _shotRate;
 	float _speed;
+	int _shotOffset;
 public:
 	Enemy(VECTOR direction, VECTOR translation, ENEMY_TYPE enemyType,float radius,float speed,int shotRate);
 	virtual void Update(char input []);

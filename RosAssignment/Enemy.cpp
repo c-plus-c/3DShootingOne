@@ -13,6 +13,7 @@ Enemy::Enemy(VECTOR direction, VECTOR translation, ENEMY_TYPE enemyType, float r
 	_enemyState = ENEMY_STATE_APPEARANCE;
 	_shotRate = shotRate;
 	_speed = speed;
+	_shotOffset = (rand() % _shotRate);
 }
 
 void Enemy::Update(char input [])
@@ -28,14 +29,14 @@ void Enemy::Update(char input [])
 		break;
 	case ENEMY_STATE_NORMAL:
 
-		if (_count%_shotRate == 0)
+		if ((_count + _shotOffset)%_shotRate == 0)
 		{
 			VECTOR target;
 			VECTOR playerPos = ObjectField::getObjectField().player.GetTranslation();
 
-			target.x = playerPos.x - 5 + rand() % 10;
-			target.y = playerPos.y - 5 + rand() % 10;
-			target.z = playerPos.z - 5 + rand() % 10;
+			target.x = playerPos.x - 4 + rand() % 9;
+			target.y = playerPos.y - 4 + rand() % 9;
+			target.z = playerPos.z - 4 + rand() % 9;
 
 			VECTOR v = VSub(target, _translation);
 			v = VNorm(v);

@@ -108,6 +108,10 @@ void Player::_manualMove(char buf [])
 		_brakeVariable += BRAKEINCREMENTATION;
 		_brakeVariable = min(BRAKEMAX, _brakeVariable);
 	}
+	else if (buf[KEY_INPUT_C] == 1){
+		_brakeVariable += BOOSTINCREMENTATION;
+		_brakeVariable = max(BOOSTMIN, _brakeVariable);
+	}
 	else{
 		_brakeVariable -= BRAKEINCREMENTATION;
 		_brakeVariable = max(BRAKEMIN, _brakeVariable);
@@ -115,13 +119,13 @@ void Player::_manualMove(char buf [])
 
 	if (buf[KEY_INPUT_Z] == 1&&_shotLockCount>=SHOT_HANDI)
 	{
-		ObjectField::getObjectField().PlayerBullet.push_back(Bullet(_direction, _translation, 1, 3, BULLET_TYPE_PLAYER));
+		ObjectField::getObjectField().PlayerBullet.push_back(Bullet(_direction, _translation, 1, VELOCITY*2.5 / min(1,_brakeVariable), BULLET_TYPE_PLAYER));
 		_shotLockCount = 0;
 		PlaySoundMem(ResourceHandles::getResourceHandles().NormalBulletSound, DX_PLAYTYPE_BACK);
 	}
 	else if (buf[KEY_INPUT_A] == 1 && _shotLockCount >= HORMINGSHOT_HANDI)
 	{
-		ObjectField::getObjectField().PlayerBullet.push_back(Bullet(_direction, _translation, 1, 3, BULLET_TYPE_PLAYER_HORMING));
+		ObjectField::getObjectField().PlayerBullet.push_back(Bullet(_direction, _translation, 1, VELOCITY*2.5 / min(1, _brakeVariable), BULLET_TYPE_PLAYER_HORMING));
 		_shotLockCount = 0;
 		PlaySoundMem(ResourceHandles::getResourceHandles().HormingBulletSound, DX_PLAYTYPE_BACK);
 	}

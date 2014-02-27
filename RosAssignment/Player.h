@@ -19,6 +19,10 @@
 #define BRAKEMIN 1
 #define BRAKEMAX 3
 
+#define BOOSTINCREMENTATION -0.1
+#define BOOSTMAX 1
+#define BOOSTMIN 0.5
+
 #define BLINK_COUNT 60
 #define DYING_COUNT 120
 

@@ -154,17 +154,17 @@ void Frame::AddNewObjects()
 		float x = r*cos(theta);
 		float y = ACTIVE_LOWEST + (rand() % (ACTIVE_HIGHEST - ACTIVE_LOWEST));
 		float z = r*sin(theta);
-		float size = 10.0 + (rand() % 10);
+		float size = 10.0 + (rand() % 11);
 
-		float dx = rand() % 10;
-		float dy = rand() % 10;
-		float dz = rand() % 10;
+		float dx = -4 + rand() % 9;
+		float dy = -4 + rand() % 9;
+		float dz = -4 + rand() % 9;
 
 		float speed = (1.5*min(10, _level - 1) / 10)*(rand() / 32768.0);
 
 		int rateraw = max(-20 * _level + 320, 20);
 
-		rateraw = rateraw - 4 * (rand() % 10);
+		rateraw = rateraw - 4 + (rand() % 9);
 
 		ObjectField::getObjectField().Enemies.push_back(Enemy(VGet(dx, dy, dz), VGet(x, y, z), ENEMY_TYPE_EMISSION, size, speed, rateraw));
 	}
