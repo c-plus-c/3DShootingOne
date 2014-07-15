@@ -8,7 +8,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPTSTR, int) {
 	SetWindowIconID(ID_ICON);
 	SetOutApplicationLogValidFlag(FALSE);
 	SetMainWindowText("Endurance UFOz");
-	ChangeWindowMode(TRUE);
+
+	int flag;
+	flag = MessageBox(
+		NULL,
+		TEXT("フルスクリーンモードで起動しますか？"),
+		TEXT("スクリーン設定"),
+		MB_YESNO | MB_ICONQUESTION);
+	if (flag == IDNO)
+		ChangeWindowMode(TRUE);
 	SetGraphMode(800, 600, 32);
 	if (DxLib_Init()<0) return -1;
 
