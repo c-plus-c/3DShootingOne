@@ -37,5 +37,3 @@ public:
 	float GetRadius();
 	ENEMY_STATE GetState();
 };
-
-bool Enemy_Erase(Enemy enemy);

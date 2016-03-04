@@ -69,10 +69,12 @@ void Frame::Play()
 	DrawRadar();
 	DrawStatus();
 
+	auto bullet_erase = [](Bullet bullet){ return bullet.GetExpired(); };
+
 	ObjectField &field = ObjectField::getObjectField();
-	field.EnemyBullet.erase(remove_if(field.EnemyBullet.begin(), field.EnemyBullet.end(), Bullet_Erase), field.EnemyBullet.end());
-	field.PlayerBullet.erase(remove_if(field.PlayerBullet.begin(), field.PlayerBullet.end(), Bullet_Erase), field.PlayerBullet.end());
-	field.Enemies.erase(remove_if(field.Enemies.begin(), field.Enemies.end(), Enemy_Erase), field.Enemies.end());
+	field.EnemyBullet.erase(remove_if(field.EnemyBullet.begin(), field.EnemyBullet.end(), bullet_erase), field.EnemyBullet.end());
+	field.PlayerBullet.erase(remove_if(field.PlayerBullet.begin(), field.PlayerBullet.end(), bullet_erase), field.PlayerBullet.end());
+	field.Enemies.erase(remove_if(field.Enemies.begin(), field.Enemies.end(), [](Enemy enemy){return enemy.GetExpired(); }), field.Enemies.end());
 
 	++_count;
 
@@ -173,42 +175,42 @@ void Frame::AddNewObjects()
 void Frame::UpdateField()
 {
 	auto &ebullets = ObjectField::getObjectField().EnemyBullet;
-	for (auto ite = ebullets.begin(); ite != ebullets.end(); ++ite)
+	for (auto& bullet:ebullets)
 	{
-		ite->Update(NULL);
+		bullet.Update(NULL);
 
-		if (ite->Collide(ObjectField::getObjectField().player.GetTranslation(),1))
+		if (bullet.Collide(ObjectField::getObjectField().player.GetTranslation(), 1))
 		{
 			ObjectField::getObjectField().player.Damage(1);
-			ite->SetHit(true);
+			bullet.SetHit(true);
 			PlaySoundMem(ResourceHandles::getResourceHandles().PlayerHitSound, DX_PLAYTYPE_BACK);
 		}
 	}
 
 	auto &enemies = ObjectField::getObjectField().Enemies;
-	for (auto ite = enemies.begin(); ite != enemies.end(); ++ite)
+	for (auto& enemy:enemies)
 	{
-		ite->Update(NULL);
+		enemy.Update(NULL);
 
-		if (ite->GetState() == ENEMY_STATE_NORMAL&& ObjectField::getObjectField().player.Collide(ite->GetTranslation(), ite->GetRadius()*0.5))
+		if (enemy.GetState() == ENEMY_STATE_NORMAL&& ObjectField::getObjectField().player.Collide(enemy.GetTranslation(), enemy.GetRadius()*0.5))
 		{
 			ObjectField::getObjectField().player.Damage(1);
-			ite->SetDefeated();
+			enemy.SetDefeated();
 			PlaySoundMem(ResourceHandles::getResourceHandles().PlayerHitSound, DX_PLAYTYPE_BACK);
 			PlaySoundMem(ResourceHandles::getResourceHandles().EnemyHitSound, DX_PLAYTYPE_BACK);
 		}
 	}
 
 	auto &pbullets = ObjectField::getObjectField().PlayerBullet;
-	for (auto ite = pbullets.begin(); ite != pbullets.end(); ++ite)
+	for (auto& pbullet:pbullets)
 	{
-		ite->Update(NULL);
-		for (auto ite2 = enemies.begin(); ite2 != enemies.end(); ++ite2)
+		pbullet.Update(NULL);
+		for (auto& enemy:enemies)
 		{
-			if (ite->Collide(ite2->GetTranslation(), ite2->GetRadius()))
+			if (pbullet.Collide(enemy.GetTranslation(), enemy.GetRadius()))
 			{
-				ite2->SetDefeated();
-				ite->SetHit(true);
+				enemy.SetDefeated();
+				pbullet.SetHit(true);
 				_score += DEFEAT_SCORE;
 				PlaySoundMem(ResourceHandles::getResourceHandles().EnemyHitSound, DX_PLAYTYPE_BACK);
 			}

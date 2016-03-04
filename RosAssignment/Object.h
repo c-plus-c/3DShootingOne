@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DxLib.h"
+#include <DxLib.h>
 #include <cmath>
 
 class Object

@@ -96,11 +96,6 @@ bool Bullet::GetExpired()
 	return ((_bulletType == BULLET_TYPE_PLAYER_HORMING&&_targetEnemy == NULL) || (_count >= BULLET_EXPIRE_COUNT) || _hit);
 }
 
-bool Bullet_Erase(Bullet bullet)
-{
-	return bullet.GetExpired();
-}
-
 void Bullet::SetHit(bool hit)
 {
 	_hit = hit;
