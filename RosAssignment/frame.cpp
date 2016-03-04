@@ -221,21 +221,21 @@ void Frame::UpdateField()
 void Frame::DrawField()
 {
 	auto &ebullets = ObjectField::getObjectField().EnemyBullet;
-	for (auto ite = ebullets.begin(); ite != ebullets.end(); ++ite)
+	for (auto& bullet : ebullets)
 	{
-		ite->Draw();
+		bullet.Draw();
 	}
 
 	auto &enemies = ObjectField::getObjectField().Enemies;
-	for (auto ite = enemies.begin(); ite != enemies.end(); ++ite)
+	for (auto& enemy : enemies)
 	{
-		ite->Draw();
+		enemy.Draw();
 	}
 
 	auto &pbullets = ObjectField::getObjectField().PlayerBullet;
-	for (auto ite = pbullets.begin(); ite != pbullets.end(); ++ite)
+	for (auto& bullet : pbullets)
 	{
-		ite->Draw();
+		bullet.Draw();
 	}
 }
 
@@ -264,17 +264,17 @@ void Frame::DrawRadar()
 	DrawExtendGraph(601, 401, 601 + 184, 401 + 184, ResourceHandles::getResourceHandles().RadarPictureHandle, 1);
 
 	auto &enemies = ObjectField::getObjectField().Enemies;
-	for (auto ite = enemies.begin(); ite != enemies.end(); ++ite)
+	for (auto& enemy : enemies)
 	{
-		VECTOR ptrans = ite->GetTranslation();
+		VECTOR ptrans = enemy.GetTranslation();
 		DrawRotaGraph(692 + 92 * (ptrans.x / ACTIVE_RADIUS), 493 - 92 * (ptrans.z / ACTIVE_RADIUS), 0.45, 0, ResourceHandles::getResourceHandles().ufoIconHandle, 1);
 		DrawFormatString(692 + 92 * (ptrans.x / ACTIVE_RADIUS) - 25, 493 - 92 * (ptrans.z / ACTIVE_RADIUS) - 25, GetColor(255, 255, 255), "%d", (int) ptrans.y);
 	}
 
 	auto &ebullets = ObjectField::getObjectField().EnemyBullet;
-	for (auto ite = ebullets.begin(); ite != ebullets.end(); ++ite)
+	for (auto& bullet : ebullets)
 	{
-		VECTOR ptrans = ite->GetTranslation();
+		VECTOR ptrans = bullet.GetTranslation();
 		DrawRotaGraph(692 + 92 * (ptrans.x / ACTIVE_RADIUS), 493 - 92 * (ptrans.z / ACTIVE_RADIUS), 0.45, 0, ResourceHandles::getResourceHandles().BulletIconHandle, 1);
 		DrawFormatString(692 + 92 * (ptrans.x / ACTIVE_RADIUS) - 25, 493 - 92 * (ptrans.z / ACTIVE_RADIUS) - 25, GetColor(255, 255, 255), "%d", (int) ptrans.y);
 	}

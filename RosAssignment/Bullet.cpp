@@ -14,16 +14,16 @@ Bullet::Bullet(VECTOR direction, VECTOR translation, int damage, float speed,  B
 	if (_bulletType == BULLET_TYPE_PLAYER_HORMING)
 	{
 		float mdist = FLT_MAX;
-		auto &field = ObjectField::getObjectField().Enemies;
+		auto &enemies = ObjectField::getObjectField().Enemies;
 
-		for (int i = 0; i<(int)field.size();++i)
+		for (auto& enemy : enemies)
 		{
-			VECTOR v = VSub(_translation, field[i].GetTranslation());
+			VECTOR v = VSub(_translation, enemy.GetTranslation());
 			float dist = VDot(v, v);
 			if (mdist > dist)
 			{
 				mdist = dist;
-				_targetEnemy = &field[i];
+				_targetEnemy = &enemy;
 			}
 		}
 	}
